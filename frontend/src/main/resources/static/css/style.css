@@ -1,0 +1,24 @@
+:root {
+    --primary-color: #006341;
+    --secondary-color: #00a86b;
+    --accent-color: #ce1126;
+}
+.navbar-custom {
+    background-color: var(--primary-color);
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: white;
+}
+.navbar-custom .nav-link:hover {
+    color: var(--secondary-color);
+}
+.btn-custom {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+}
+.btn-custom:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}

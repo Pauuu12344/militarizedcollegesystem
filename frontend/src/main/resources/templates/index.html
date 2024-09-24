@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments :: head('Inicio')}"/>
+<body>
+<nav th:replace="~{fragments :: navbar('home')}"/>
+<div class="container mt-4">
+    <h1 class="mb-4">Sistema de Colegios Militarizados</h1>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Usuarios
+                    </h4>
+                    <p class="card-text">
+                        Administración de usuarios del sistema. Es accedido por el área de TI. Catálogo de roles.
+                        Catálogo de usuarios. Cambio de contraseña.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/users}" class="btn btn-custom w-100">
+                        Ir a Usuarios.
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Aspirantes
+                    </h4>
+                    <p class="card-text">
+                        Catálogo de Periodos de inscripción. Solo será accedida por el área de
+                        Servicios Escolares. Formulario público de registro de los aspirantes. Validación de resultados.
+                        Pantalla solo accedida por servicios escolares. Pantalla pública de resultados.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-custom w-100">
+                        Ir a Aspirantes.
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Personal
+                    </h4>
+                    <p class="card-text">Gestiona áreas y muestra un cátalogo de personal con registro.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-custom w-100">
+                        Ir a Personal.
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Grupos
+                    </h4>
+                    <p class="card-text">
+                        Accedido únicamente por servicios escolares, gestiona las carreras, un cátalogo de grupos con
+                        registro, sección de profesores para visualizar los grupos y alumnos y sección de alumnos para
+                        mostrar el periodo, materias y calificaciones.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-custom w-100">
+                        Ir a Grupos.
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Becas
+                    </h4>
+                    <p class="card-text">
+                        Accedido únicamente por servicios escolares, muestra un catálogo de becas,
+                        registro de solicitudes de becas para los alumnos, validación de solicitudes y lista de
+                        resultados accedido por todos.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-custom w-100">
+                        Ir a Becas.
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments :: footer}"/>
+</body>
+</html>

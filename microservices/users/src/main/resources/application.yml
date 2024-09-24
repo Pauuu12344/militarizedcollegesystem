@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: users
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/mcs-users?createDatabaseIfNotExist=true
+    username: root
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8085

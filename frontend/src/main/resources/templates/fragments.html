@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity6"
+      lang="es">
+<body>
+<head th:fragment="head(title)">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minium-scale=1.0">
+    <title>[[${title}]] | Sistema de Colegios Militarizados</title>
+    <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/6.5.2/css/all.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/sweetalert/2.1.0/sweetalert.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/font-awesome/6.5.2/js/all.js}"></script>
+</head>
+<body>
+<footer th:fragment="footer" class="text-center text-lg-start mt-4">
+    <div class="text-center p-3">
+        © [[${T(java.time.Year).now().value}]] Sistema de Colegios Militarizados - Gobierno de México
+    </div>
+</footer>
+
+<nav th:fragment="navbar(currentPage)" class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand mx-4" th:href="@{/}">
+            <img th:src="@{/img/mexicomini.png}" alt="Logo" class="d-inline-block img-fluid align-text-top me-2">
+        </a>
+        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${currentPage == 'home'} ? 'fs-2'" th:href="@{/}">Inicio</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAuthority('ROLE_INFORMATION_TECHNOLOGIES')">
+                    <a class="nav-link" th:classappend="${currentPage == 'users'} ? 'fs-2'"
+                       th:href="@{/users}">Usuarios</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAuthority('ROLE_INFORMATION_TECHNOLOGIES')">
+                    <a class="nav-link" th:classappend="${currentPage == 'roles'} ? 'fs-2'"
+                       th:href="@{/roles}">Roles</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAuthority('ROLE_SCHOOL_SERVICES')">
+                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'" th:href="@{/periods}">Periodos</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAuthority('ROLE_SCHOOL_SERVICES')">
+                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'"
+                       th:href="@{/applicants}">Aspirantes</a>
+                </li>
+
+
+                <li class="nav-item" sec:authorize="hasAuthority('ROLE_HUMAN_RESOURCES')">
+                    <a class="nav-link" th:classappend="${currentPage == 'staff'} ? 'fs-2'"
+                       th:href="@{/staff}">Personal</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAnyAuthority(
+                            'ROLE_STUDENT',
+                            'ROLE_TEACHER',
+                            'ROLE_SCHOOL_SERVICES',
+                )">
+                    <a class="nav-link" th:classappend="${currentPage == 'grades'} ? 'fs-2'"
+                       th:href="@{/grades}">Calificaciones</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAnyAuthority(
+                            'ROLE_TEACHER',
+                            'ROLE_SCHOOL_SERVICES',
+                )">
+                    <a class="nav-link" th:classappend="${currentPage == 'groups'} ? 'fs-2'"
+                       th:href="@{/groups}">Grupos</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAnyAuthority(
+                            'ROLE_STUDENT',
+                            'ROLE_TEACHER',
+                            'ROLE_SCHOOL_SERVICES',
+                            'ROLE_HUMAN_RESOURCES',
+                            'ROLE_INFORMATION_TECHNOLOGIES'
+                )">
+                    <a class="nav-link" th:classappend="${currentPage == 'scholarships'} ? 'fs-2'"
+                       th:href="@{/scholarships}">Becas</a>
+                </li>
+
+                <br/>
+
+                <li class="nav-item">
+                    <form method="post" name="logoutForm" th:action="@{/logout}">
+                        <button type="submit" class="dropdown-item text-white">Salir</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

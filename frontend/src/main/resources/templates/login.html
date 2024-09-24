@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments :: head('Acceso')}"></head>
+<body>
+<div class="p-3 text-center">
+    <img th:src="@{/img/mexico.png}" alt="Escudo de México"/>
+</div>
+<div class="container-fluid d-flex justify-content-center">
+    <form class="w-50 p-3" method="post" th:action="@{/login}">
+        <div class="border border-dark rounded p-3">
+            <p class="text-center">Acceso al Sistema de Colegios Militarizados</p>
+            <p>
+                <input class="form-control" type="text" name="username" placeholder="Nombre de Usuario" required
+                       minlength="4"
+                       maxlength="128">
+            </p>
+            <p>
+                <input class="form-control" type="password" name="password" placeholder="Contraseña" required
+                       minlength="4" maxlength="64">
+            </p>
+            <p>
+                <input type="checkbox" name="remember-me">&nbsp;Recuérdame
+            </p>
+            <div th:if="${param.error}" class="text-center">
+                <p class="text-danger">Credenciales incorrectas, disculpa.</p>
+            </div>
+            <div th:if="${param.logout}" class="text-center">
+                <p class="text-warning">Saliste.</p>
+            </div>
+            <button class="btn btn-success w-100" type="submit" value="Login">Ingresar</button>
+        </div>
+    </form>
+</div>
+<div th:replace="~{fragments :: footer}"/>
+</body>
+</html>

@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: frontend
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+
+server:
+  port: 8080
+
+microservices:
+  url:
+    academics: http://localhost:8081/academics/
+    admissions: http://localhost:8082/scholarships/
+    scholarships: http://localhost:8083/scholarships/
+    staff: http://localhost:8084/staff/
+    users: http://localhost:8085/users/

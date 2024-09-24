@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments :: head('Inicio')}"/>
+<body>
+<nav th:replace="~{fragments :: navbar('users')}"/>
+
+<div class="container mt-4">
+    <h1 class="mb-4">[[${usuarios}]]</h1>
+</div>
+
+<footer th:replace="~{fragments :: footer}"/>
+</body>
+</html>
