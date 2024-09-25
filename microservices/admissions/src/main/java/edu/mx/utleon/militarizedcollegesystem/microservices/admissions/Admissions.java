@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 @EntityScan({"edu.mx.utleon.militarizedcollegesystem.model.admissions"})
-public class AdmissionsApplication {
+public class Admissions {
 
     public static void main(String[] args) {
-        SpringApplication.run(AdmissionsApplication.class, args);
+        SpringApplication.run(Admissions.class, args);
     }
 
 }
