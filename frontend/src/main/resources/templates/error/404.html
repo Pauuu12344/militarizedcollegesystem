@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      lang="en">
+<head th:replace="~{fragments :: head('Error')}"></head>
+<body>
+<div class="container-fluid">
+    <div class="text-center p-3">
+        <img th:src="@{/img/mexico.png}" alt="Escudo de México"/>
+        <h1>404.</h1>
+        <small>Eso es un error.</small>
+        <p>El recurso solicitado no existe.</p>
+    </div>
+    <footer th:replace="~{fragments :: footer}"></footer>
+</div>
+</body>
+</html>
