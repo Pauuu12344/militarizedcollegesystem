@@ -1,6 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.staff.repository;
 
-import edu.mx.utleon.militarizedcollegesystem.model.staff.Area;
+import edu.mx.utleon.militarizedcollegesystem.common.entity.staff.Area;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

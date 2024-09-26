@@ -1,6 +1,6 @@
-package edu.mx.utleon.militarizedcollegesystem.microservices.users.repositories;
+package edu.mx.utleon.militarizedcollegesystem.microservices.users.users;
 
-import edu.mx.utleon.militarizedcollegesystem.model.users.Role;
+import edu.mx.utleon.militarizedcollegesystem.common.entity.users.Role;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

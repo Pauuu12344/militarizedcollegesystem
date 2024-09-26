@@ -1,8 +1,7 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.staff.service;
 
 import edu.mx.utleon.militarizedcollegesystem.microservices.staff.repository.AreaRepository;
-import edu.mx.utleon.militarizedcollegesystem.model.staff.Area;
-import lombok.RequiredArgsConstructor;
+import edu.mx.utleon.militarizedcollegesystem.common.entity.staff.Area;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

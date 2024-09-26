@@ -1,7 +1,7 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.admissions.controller;
 
 import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.service.ApplicantService;
-import edu.mx.utleon.militarizedcollegesystem.model.admissions.Applicant;
+import edu.mx.utleon.militarizedcollegesystem.common.entity.admissions.Applicant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

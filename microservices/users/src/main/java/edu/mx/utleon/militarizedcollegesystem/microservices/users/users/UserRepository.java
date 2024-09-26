@@ -1,6 +1,6 @@
-package edu.mx.utleon.militarizedcollegesystem.microservices.users.repositories;
+package edu.mx.utleon.militarizedcollegesystem.microservices.users.users;
 
-import edu.mx.utleon.militarizedcollegesystem.model.users.User;
+import edu.mx.utleon.militarizedcollegesystem.common.entity.users.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
