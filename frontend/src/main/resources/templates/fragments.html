@@ -2,7 +2,6 @@
 <html xmlns:th="http://thymeleaf.org"
       xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity6"
       lang="es">
-<body>
 <head th:fragment="head(title)">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minium-scale=1.0">
@@ -37,54 +36,48 @@
                     <a class="nav-link" th:classappend="${currentPage == 'home'} ? 'fs-2'" th:href="@{/}">Inicio</a>
                 </li>
 
-                <li class="nav-item" sec:authorize="hasAuthority('ROLE_INFORMATION_TECHNOLOGIES')">
+                <li class="nav-item" sec:authorize="hasAuthority('INFORMATION_TECHNOLOGIES')">
                     <a class="nav-link" th:classappend="${currentPage == 'users'} ? 'fs-2'"
                        th:href="@{/users}">Usuarios</a>
                 </li>
 
-                <li class="nav-item" sec:authorize="hasAuthority('ROLE_INFORMATION_TECHNOLOGIES')">
-                    <a class="nav-link" th:classappend="${currentPage == 'roles'} ? 'fs-2'"
-                       th:href="@{/roles}">Roles</a>
-                </li>
-
-                <li class="nav-item" sec:authorize="hasAuthority('ROLE_SCHOOL_SERVICES')">
-                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'" th:href="@{/periods}">Periodos</a>
-                </li>
-
-                <li class="nav-item" sec:authorize="hasAuthority('ROLE_SCHOOL_SERVICES')">
-                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'"
-                       th:href="@{/applicants}">Aspirantes</a>
-                </li>
-
-
-                <li class="nav-item" sec:authorize="hasAuthority('ROLE_HUMAN_RESOURCES')">
+                <li class="nav-item" sec:authorize="hasAuthority('HUMAN_RESOURCES')">
                     <a class="nav-link" th:classappend="${currentPage == 'staff'} ? 'fs-2'"
                        th:href="@{/staff}">Personal</a>
                 </li>
 
+                <li class="nav-item" sec:authorize="hasAuthority('SCHOOL_SERVICES')">
+                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'"
+                       th:href="@{/applicants}">Aspirantes</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAuthority('SCHOOL_SERVICES')">
+                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'" th:href="@{/periods}">Periodos</a>
+                </li>
+
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
-                            'ROLE_STUDENT',
-                            'ROLE_TEACHER',
-                            'ROLE_SCHOOL_SERVICES',
+                            'STUDENT',
+                            'TEACHER',
+                            'SCHOOL_SERVICES',
                 )">
                     <a class="nav-link" th:classappend="${currentPage == 'grades'} ? 'fs-2'"
                        th:href="@{/grades}">Calificaciones</a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
-                            'ROLE_TEACHER',
-                            'ROLE_SCHOOL_SERVICES',
+                            'TEACHER',
+                            'SCHOOL_SERVICES',
                 )">
                     <a class="nav-link" th:classappend="${currentPage == 'groups'} ? 'fs-2'"
                        th:href="@{/groups}">Grupos</a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
-                            'ROLE_STUDENT',
-                            'ROLE_TEACHER',
-                            'ROLE_SCHOOL_SERVICES',
-                            'ROLE_HUMAN_RESOURCES',
-                            'ROLE_INFORMATION_TECHNOLOGIES'
+                            'STUDENT',
+                            'TEACHER',
+                            'SCHOOL_SERVICES',
+                            'HUMAN_RESOURCES',
+                            'INFORMATION_TECHNOLOGIES'
                 )">
                     <a class="nav-link" th:classappend="${currentPage == 'scholarships'} ? 'fs-2'"
                        th:href="@{/scholarships}">Becas</a>

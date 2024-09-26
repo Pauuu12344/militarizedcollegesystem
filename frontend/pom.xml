@@ -23,7 +23,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>edu.mx.utleon.militarizedcollegesystem</groupId>
-			<artifactId>model</artifactId>
+			<artifactId>common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

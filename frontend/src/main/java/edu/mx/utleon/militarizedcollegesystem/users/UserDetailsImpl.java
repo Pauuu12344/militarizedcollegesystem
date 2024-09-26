@@ -1,6 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.users;
 
-import edu.mx.utleon.militarizedcollegesystem.model.users.User;
+import edu.mx.utleon.militarizedcollegesystem.common.entity.users.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

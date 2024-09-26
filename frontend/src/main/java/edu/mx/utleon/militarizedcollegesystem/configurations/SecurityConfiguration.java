@@ -1,7 +1,7 @@
 package edu.mx.utleon.militarizedcollegesystem.configurations;
 
 import edu.mx.utleon.militarizedcollegesystem.users.UserDetailsServiceImpl;
-import edu.mx.utleon.militarizedcollegesystem.model.users.Roles;
+import edu.mx.utleon.militarizedcollegesystem.common.entity.users.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +9,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -27,50 +28,50 @@ public class SecurityConfiguration {
                     .permitAll();
             authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/users/**")
-                    .hasAuthority(Roles.ROLE_INFORMATION_TECHNOLOGIES.name())
+                    .hasAuthority(Roles.INFORMATION_TECHNOLOGIES.name())
 
                     .requestMatchers("/roles/**")
-                    .hasAuthority(Roles.ROLE_INFORMATION_TECHNOLOGIES.name())
+                    .hasAuthority(Roles.INFORMATION_TECHNOLOGIES.name())
 
                     .requestMatchers("/periods/**")
-                    .hasAuthority(Roles.ROLE_SCHOOL_SERVICES.name())
+                    .hasAuthority(Roles.SCHOOL_SERVICES.name())
 
                     .requestMatchers("/applicants/**")
-                    .hasAuthority(Roles.ROLE_SCHOOL_SERVICES.name())
+                    .hasAuthority(Roles.SCHOOL_SERVICES.name())
 
                     .requestMatchers("/scholarships/results")
                     .hasAnyAuthority(
-                            Roles.ROLE_STUDENT.name(),
-                            Roles.ROLE_TEACHER.name(),
-                            Roles.ROLE_SCHOOL_SERVICES.name(),
-                            Roles.ROLE_HUMAN_RESOURCES.name(),
-                            Roles.ROLE_INFORMATION_TECHNOLOGIES.name()
+                            Roles.STUDENT.name(),
+                            Roles.TEACHER.name(),
+                            Roles.SCHOOL_SERVICES.name(),
+                            Roles.HUMAN_RESOURCES.name(),
+                            Roles.INFORMATION_TECHNOLOGIES.name()
                     )
 
                     .requestMatchers("/scholarships/apply")
                     .hasAuthority(
-                            Roles.ROLE_STUDENT.name()
+                            Roles.STUDENT.name()
                     )
 
                     .requestMatchers("/scholarships/applications")
                     .hasAuthority(
-                            Roles.ROLE_SCHOOL_SERVICES.name()
+                            Roles.SCHOOL_SERVICES.name()
                     )
 
                     .requestMatchers("/staff/**")
-                    .hasAuthority(Roles.ROLE_HUMAN_RESOURCES.name())
+                    .hasAuthority(Roles.HUMAN_RESOURCES.name())
 
                     .requestMatchers("/grades/**")
                     .hasAnyAuthority(
-                            Roles.ROLE_STUDENT.name(),
-                            Roles.ROLE_TEACHER.name(),
-                            Roles.ROLE_SCHOOL_SERVICES.name()
+                            Roles.STUDENT.name(),
+                            Roles.TEACHER.name(),
+                            Roles.SCHOOL_SERVICES.name()
                     )
 
                     .requestMatchers("/groups/**")
                     .hasAnyAuthority(
-                            Roles.ROLE_TEACHER.name(),
-                            Roles.ROLE_SCHOOL_SERVICES.name()
+                            Roles.TEACHER.name(),
+                            Roles.SCHOOL_SERVICES.name()
                     )
 
                     .anyRequest()
@@ -101,7 +102,7 @@ public class SecurityConfiguration {
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
