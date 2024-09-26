@@ -2,7 +2,7 @@ package edu.mx.utleon.militarizedcollegesystem.configurations;
 
 import edu.mx.utleon.militarizedcollegesystem.users.UserDetailsServiceImpl;
 import edu.mx.utleon.militarizedcollegesystem.model.users.Roles;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,10 +14,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 @Configuration
-@RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    private final UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

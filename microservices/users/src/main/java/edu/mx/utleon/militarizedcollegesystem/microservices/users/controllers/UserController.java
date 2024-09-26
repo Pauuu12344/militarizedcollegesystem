@@ -2,7 +2,6 @@ package edu.mx.utleon.militarizedcollegesystem.microservices.users.controllers;
 
 import edu.mx.utleon.militarizedcollegesystem.microservices.users.services.UserService;
 import edu.mx.utleon.militarizedcollegesystem.model.users.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
