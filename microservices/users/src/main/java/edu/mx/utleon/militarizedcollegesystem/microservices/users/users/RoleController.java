@@ -1,6 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.users.users;
 
-import edu.mx.utleon.militarizedcollegesystem.common.entity.users.Role;
+import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

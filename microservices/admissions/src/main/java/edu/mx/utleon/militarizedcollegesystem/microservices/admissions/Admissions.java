@@ -5,7 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan({"edu.mx.utleon.militarizedcollegesystem.model.admissions"})
+@EntityScan({
+        "edu.mx.utleon.militarizedcollegesystem.model.admissions",
+        "edu.mx.utleon.militarizedcollegesystem.model.academics",
+        "edu.mx.utleon.militarizedcollegesystem.model.users"
+})
 public class Admissions {
 
     public static void main(String[] args) {

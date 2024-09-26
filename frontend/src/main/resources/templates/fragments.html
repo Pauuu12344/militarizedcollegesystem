@@ -36,48 +36,48 @@
                     <a class="nav-link" th:classappend="${currentPage == 'home'} ? 'fs-2'" th:href="@{/}">Inicio</a>
                 </li>
 
-                <li class="nav-item" sec:authorize="hasAuthority('INFORMATION_TECHNOLOGIES')">
+                <li class="nav-item" sec:authorize="hasAuthority('TECNOLOGIAS_DE_LA_INFORMACION')">
                     <a class="nav-link" th:classappend="${currentPage == 'users'} ? 'fs-2'"
                        th:href="@{/users}">Usuarios</a>
                 </li>
 
-                <li class="nav-item" sec:authorize="hasAuthority('HUMAN_RESOURCES')">
+                <li class="nav-item" sec:authorize="hasAuthority('RECURSOS_HUMANOS')">
                     <a class="nav-link" th:classappend="${currentPage == 'staff'} ? 'fs-2'"
                        th:href="@{/staff}">Personal</a>
                 </li>
 
-                <li class="nav-item" sec:authorize="hasAuthority('SCHOOL_SERVICES')">
+                <li class="nav-item" sec:authorize="hasAuthority('SERVICIOS_ESCOLARES')">
                     <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'"
                        th:href="@{/applicants}">Aspirantes</a>
                 </li>
 
-                <li class="nav-item" sec:authorize="hasAuthority('SCHOOL_SERVICES')">
+                <li class="nav-item" sec:authorize="hasAuthority('SERVICIOS_ESCOLARES')">
                     <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'" th:href="@{/periods}">Periodos</a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
-                            'STUDENT',
-                            'TEACHER',
-                            'SCHOOL_SERVICES',
+                            'ESTUDIANTE',
+                            'PROFESOR',
+                            'SERVICIOS_ESCOLARES',
                 )">
                     <a class="nav-link" th:classappend="${currentPage == 'grades'} ? 'fs-2'"
                        th:href="@{/grades}">Calificaciones</a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
-                            'TEACHER',
-                            'SCHOOL_SERVICES',
+                            'PROFESOR',
+                            'SERVICIOS_ESCOLARES',
                 )">
                     <a class="nav-link" th:classappend="${currentPage == 'groups'} ? 'fs-2'"
                        th:href="@{/groups}">Grupos</a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
-                            'STUDENT',
-                            'TEACHER',
-                            'SCHOOL_SERVICES',
-                            'HUMAN_RESOURCES',
-                            'INFORMATION_TECHNOLOGIES'
+                            'ESTUDIANTE',
+                            'PROFESOR',
+                            'SERVICIOS_ESCOLARES',
+                            'RECURSOS_HUMANOS',
+                            'TECNOLOGIAS_DE_LA_INFORMACION'
                 )">
                     <a class="nav-link" th:classappend="${currentPage == 'scholarships'} ? 'fs-2'"
                        th:href="@{/scholarships}">Becas</a>

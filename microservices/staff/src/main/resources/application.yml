@@ -2,10 +2,17 @@ spring:
   application:
     name: staff
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/mcs-staff?createDatabaseIfNotExist=true
-    username: root
-    password: password
+  staff:
+    datasource:
+      jdbcUrl: jdbc:mysql://localhost:3306/mcs-staff?createDatabaseIfNotExist=true
+      username: root
+      password: password
+
+  users:
+    datasource:
+      jdbcUrl: jdbc:mysql://localhost:3306/mcs-users?createDatabaseIfNotExist=true
+      username: root
+      password: password
 
   jpa:
     hibernate:

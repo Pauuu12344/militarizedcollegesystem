@@ -2,10 +2,23 @@ spring:
   application:
     name: academics
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/mcs-scholarships?createDatabaseIfNotExist=true
-    username: root
-    password: password
+  scholarships:
+    datasource:
+      jdbcUrl: jdbc:mysql://localhost:3306/mcs-scholarships?createDatabaseIfNotExist=true
+      username: root
+      password: password
+
+  academics:
+    datasource:
+      jdbcUrl: jdbc:mysql://localhost:3306/mcs-academics?createDatabaseIfNotExist=true
+      username: root
+      password: password
+
+  users:
+    datasource:
+      jdbcUrl: jdbc:mysql://localhost:3306/mcs-users?createDatabaseIfNotExist=true
+      username: root
+      password: password
 
   jpa:
     hibernate:

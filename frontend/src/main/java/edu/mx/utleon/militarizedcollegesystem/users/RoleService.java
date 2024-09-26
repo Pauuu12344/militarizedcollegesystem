@@ -1,7 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.users;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dto.UserPersonDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entity.users.Roles;
+import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

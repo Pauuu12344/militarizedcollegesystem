@@ -1,9 +1,8 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.users.users;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dto.UserPersonDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entity.staff.Person;
-import edu.mx.utleon.militarizedcollegesystem.common.entity.users.User;
-import edu.mx.utleon.militarizedcollegesystem.microservices.users.staff.PersonRepository;
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserPersonDto;
+import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Person;
+import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PersonRepository personRepository;
-
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
@@ -30,7 +26,6 @@ public class UserService {
     }
 
     private UserPersonDto buildPersonDto(User user) {
-        Person person = personRepository.findById(user.getPersonId()).orElse(null);
         return UserPersonDto.builder()
                 .userId(user.getId())
                 .username(user.getUsername())
@@ -38,10 +33,10 @@ public class UserService {
                 .email(user.getEmail())
                 .active(user.isActive())
                 .role(user.getRole().getName())
-                .personId(person.getId())
-                .fullName(person.getFullName())
-                .phone(person.getPhone())
-                .curp(person.getCurp())
+                .personId(user.getPerson().getId())
+                .fullName(user.getPerson().getFullName())
+                .phone(user.getPerson().getPhone())
+                .curp(user.getPerson().getCurp())
                 .build();
     }
 
