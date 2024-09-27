@@ -63,6 +63,14 @@
                     </a>
                 </li>
 
+                <li class="nav-item" sec:authorize="hasAuthority('RECURSOS_HUMANOS')">
+                    <a class="nav-link" th:classappend="${currentPage == 'areas'} ? 'fs-5'"
+                       th:href="@{/areas}">
+                        <i class="fa-solid fa-sitemap"></i>
+                        Áreas
+                    </a>
+                </li>
+
                 <li class="nav-item" sec:authorize="hasAuthority('SERVICIOS_ESCOLARES')">
                     <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-5'"
                        th:href="@{/applicants}">
