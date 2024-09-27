@@ -30,7 +30,7 @@ public class Applicant {
     private Long periodId;
 
     @Column(nullable = false)
-    private String status;
+    private boolean status;
 
     @PrePersist
     private void generateEnrollment() {
