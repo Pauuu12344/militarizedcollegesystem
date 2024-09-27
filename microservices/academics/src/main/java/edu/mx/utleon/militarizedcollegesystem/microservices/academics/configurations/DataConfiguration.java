@@ -60,7 +60,6 @@ public class DataConfiguration {
         Person personStudent = createPerson(Person.builder()
                 .curp("XXXX000000XXXXXXX0")
                 .fullName("Student")
-                .email("")
                 .phone(4771234567L)
                 .build());
 
