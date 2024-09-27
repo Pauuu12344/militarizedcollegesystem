@@ -1,18 +1,15 @@
 package edu.mx.utleon.militarizedcollegesystem.common.dtos;
 
-import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Area;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Contract;
 import lombok.*;
 
-import java.time.Instant;
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
-public class PersonnelPersonDto {
-    private Long personnelId;
+public class EmployeePersonDto {
+    private Long employeeId;
     private String number;
     private String startDate;
     private String contract;
@@ -21,4 +18,9 @@ public class PersonnelPersonDto {
     private String fullName;
     private Long phone;
     private String curp;
+    private Long userId;
+    private String username;
+    private String password;
+    private String email;
+    private boolean active;
 }

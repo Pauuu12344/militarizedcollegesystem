@@ -8,7 +8,7 @@ import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
 import edu.mx.utleon.militarizedcollegesystem.microservices.staff.staff.AreaRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.staff.staff.ContractRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.staff.users.PersonRepository;
-import edu.mx.utleon.militarizedcollegesystem.microservices.staff.staff.PersonnelRepository;
+import edu.mx.utleon.militarizedcollegesystem.microservices.staff.staff.EmployeeRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.staff.users.RoleRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.staff.users.UserRepository;
 import jakarta.transaction.Transactional;
@@ -26,7 +26,7 @@ public class DataConfigurations {
     private ContractRepository contractRepository;
 
     @Autowired
-    private PersonnelRepository personnelRepository;
+    private EmployeeRepository employeeRepository;
 
     @Autowired
     private PersonRepository personRepository;
@@ -80,7 +80,7 @@ public class DataConfigurations {
                 .phone(4771234567L)
                 .build());
 
-        Personnel personnelInformationTechnologies = createPersonnel(Personnel.builder()
+        Employee employeeInformationTechnologies = createEmployee(Employee.builder()
                 .contract(contractBase)
                 .startDate(Instant.now())
                 .personId(personInformationTechnologies.getId())
@@ -88,21 +88,21 @@ public class DataConfigurations {
                 .build());
 
 
-        Personnel personnelTeacher = createPersonnel(Personnel.builder()
+        Employee employeeTeacher = createEmployee(Employee.builder()
                 .contract(contractBase)
                 .startDate(Instant.now())
                 .personId(personTeacher.getId())
                 .area(areaProfesores)
                 .build());
 
-        Personnel personnelHumanResources = createPersonnel(Personnel.builder()
+        Employee employeeHumanResources = createEmployee(Employee.builder()
                 .contract(contractBase)
                 .startDate(Instant.now())
                 .personId(personHumanResources.getId())
                 .area(areaRecursosHumanos)
                 .build());
 
-        Personnel personnelSchoolServices = createPersonnel(Personnel.builder()
+        Employee employeeSchoolServices = createEmployee(Employee.builder()
                 .contract(contractBase)
                 .startDate(Instant.now())
                 .personId(personSchoolServices.getId())
@@ -165,11 +165,11 @@ public class DataConfigurations {
     }
 
     @Transactional
-    protected Personnel createPersonnel(Personnel personnel) {
-        Personnel newPersonnel = personnelRepository.findByPersonId(personnel.getPersonId()).orElse(null);
-        if (newPersonnel == null)
-            newPersonnel = personnelRepository.save(personnel);
-        return newPersonnel;
+    protected Employee createEmployee(Employee employee) {
+        Employee newEmployee = employeeRepository.findByPersonId(employee.getPersonId()).orElse(null);
+        if (newEmployee == null)
+            newEmployee = employeeRepository.save(employee);
+        return newEmployee;
     }
 
     @Transactional

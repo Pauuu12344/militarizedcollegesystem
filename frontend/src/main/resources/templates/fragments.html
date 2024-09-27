@@ -56,10 +56,10 @@
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAuthority('RECURSOS_HUMANOS')">
-                    <a class="nav-link" th:classappend="${currentPage == 'staff'} ? 'fs-5'"
-                       th:href="@{/staff}">
+                    <a class="nav-link" th:classappend="${currentPage == 'employees'} ? 'fs-5'"
+                       th:href="@{/employees}">
                         <i class="fa-solid fa-users"></i>
-                        Personal
+                        Empleados
                     </a>
                 </li>
 
