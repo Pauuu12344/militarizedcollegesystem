@@ -13,6 +13,6 @@ public class EmployeeController {
     @GetMapping("/employees")
     public String viewEmployees(Model model) {
         model.addAttribute("employees", employeeService.getAllEmployees());
-        return "employees/employees";
+        return "staff/employees";
     }
 }

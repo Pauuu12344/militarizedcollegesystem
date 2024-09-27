@@ -14,7 +14,7 @@ public class RoleController {
     @GetMapping("/roles")
     public String viewRoles(Model model) {
         model.addAttribute("roles", roleService.getAllRoles());
-        return "roles/roles";
+        return "users/roles";
     }
 
 }
