@@ -10,9 +10,6 @@
 
     <form method="post" th:object="${user}" th:action="@{/account}" >
         <input type="hidden" th:field="*{id}">
-        <input type="hidden" th:field="*{active}">
-        <input type="hidden" th:field="*{role.id}">
-        <input type="hidden" th:field="*{person.id}">
         <div class="mb-3">
             <label for="fullName" class="form-label">Nombre Completo</label>
             <input type="text" class="form-control" id="fullName" name="fullName" required th:field="*{person.fullName}">
@@ -24,6 +21,10 @@
         <div class="mb-3">
             <label for="curp" class="form-label">Clave Única de Registro Poblacional (CURP)</label>
             <input type="text" class="form-control" id="curp" name="curp" required th:field="*{person.curp}">
+        </div>
+        <div class="mb-3">
+            <label for="fullName" class="form-label">Rol</label>
+            <input type="text" class="form-control" id="role" name="role" readonly th:field="*{role.name}">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
