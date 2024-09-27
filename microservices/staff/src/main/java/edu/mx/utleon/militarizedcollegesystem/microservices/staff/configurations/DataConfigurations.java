@@ -166,7 +166,7 @@ public class DataConfigurations {
 
     @Transactional
     protected Personnel createPersonnel(Personnel personnel) {
-        Personnel newPersonnel = personnelRepository.findByNumber(personnel.getNumber()).orElse(null);
+        Personnel newPersonnel = personnelRepository.findByPersonId(personnel.getPersonId()).orElse(null);
         if (newPersonnel == null)
             newPersonnel = personnelRepository.save(personnel);
         return newPersonnel;

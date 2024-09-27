@@ -12,4 +12,6 @@ public interface PersonnelRepository extends CrudRepository<Personnel, Long> {
 
     Optional<Personnel> findByNumber(String number);
 
+    Optional<Personnel> findByPersonId(Long personId);
+
 }

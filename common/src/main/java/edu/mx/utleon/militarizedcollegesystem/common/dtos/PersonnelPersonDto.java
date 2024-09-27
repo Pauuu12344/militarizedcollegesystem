@@ -12,11 +12,13 @@ import java.time.Instant;
 @Builder
 @ToString
 public class PersonnelPersonDto {
-    private Long id;
+    private Long personnelId;
     private String number;
-    private Instant startDate;
-    private Contract contract;
-    private Area area;
+    private String startDate;
+    private String contract;
+    private String area;
     private Long personId;
-
+    private String fullName;
+    private Long phone;
+    private String curp;
 }
