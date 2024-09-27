@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 public class CareerController {
+
     @Autowired
     private CareerService careerService;
 
@@ -18,6 +19,6 @@ public class CareerController {
     @GetMapping("/careers")
     public List<Career> getAllCareers(){
         return careerService.getAllCareers();
-
     }
+
 }

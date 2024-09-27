@@ -16,10 +16,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
+
     @Autowired
     private EmployeeRepository employeeRepository;
+
     @Autowired
     private PersonRepository personRepository;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -49,4 +52,5 @@ public class EmployeeService {
                 .active(user.isActive())
                 .build();
     }
+
 }

@@ -8,5 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface PeriodRepository extends CrudRepository<Period, Long> {
+
     Optional<Period> findByName(String name);
+
 }

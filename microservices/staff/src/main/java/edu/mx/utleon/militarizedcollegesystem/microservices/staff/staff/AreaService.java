@@ -9,13 +9,15 @@ import java.util.List;
 @Service
 
 public class AreaService {
+
     @Autowired
- private  AreaRepository areaRepository;
-    public Area getAreaById(Long id){
-        Area area= areaRepository.findById(id).orElse(null);
-        return  area;
+    private AreaRepository areaRepository;
+
+    public Area getAreaById(Long id) {
+        return areaRepository.findById(id).orElse(null);
     }
-    public List<Area> getAllAreas(){
-        return(List<Area>) areaRepository.findAll();
+
+    public List<Area> getAllAreas() {
+        return (List<Area>) areaRepository.findAll();
     }
 }

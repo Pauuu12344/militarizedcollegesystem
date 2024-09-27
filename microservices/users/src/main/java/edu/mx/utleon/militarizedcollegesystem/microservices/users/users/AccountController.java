@@ -14,8 +14,7 @@ public class AccountController {
 
 
     @PostMapping("/account")
-    public UserDto saveUser(@RequestBody UserDto user) {
-        System.out.println(user);
+    public UserDto updateAccount(@RequestBody UserDto user) {
         return userService.updateAccount(user);
     }
 

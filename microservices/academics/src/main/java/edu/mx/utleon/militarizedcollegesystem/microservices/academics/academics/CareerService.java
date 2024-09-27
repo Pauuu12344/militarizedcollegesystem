@@ -9,11 +9,12 @@ import java.util.List;
 
 @Service
 public class CareerService {
+
     @Autowired
     private  CareerRepository careerRepository;
-
 
     public List<Career> getAllCareers(){
         return(List<Career>) careerRepository.findAll();
     }
+
 }
