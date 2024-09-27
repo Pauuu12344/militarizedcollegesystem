@@ -1,6 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.staff;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeePersonDto;
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class EmployeeService {
     @Value("${microservices.url.staff}")
     private String STAFF_URL;
 
-    public List<EmployeePersonDto> getAllEmployees() {
+    public List<EmployeeDto> getAllEmployees() {
         String path = STAFF_URL + "employees";
         return restTemplate.getForObject(path, List.class);
     }

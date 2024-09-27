@@ -1,6 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.staff.staff;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeePersonDto;
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeeDto;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Employee;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Person;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
@@ -23,16 +23,16 @@ public class EmployeeService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<EmployeePersonDto> getAllEmployees() {
+    public List<EmployeeDto> getAllEmployees() {
         return ((List<Employee>) employeeRepository.findAll()).stream()
-                .map(this::buildEmployeePersonDto)
+                .map(this::buildEmployeeDto)
                 .collect(Collectors.toList());
     }
 
-    private EmployeePersonDto buildEmployeePersonDto(Employee employee) {
+    private EmployeeDto buildEmployeeDto(Employee employee) {
         Person person = personRepository.findById(employee.getPersonId()).orElse(null);
         User user = userRepository.findByPersonId(employee.getPersonId()).orElse(null);
-        return EmployeePersonDto.builder()
+        return EmployeeDto.builder()
                 .employeeId(employee.getId())
                 .number(employee.getNumber())
                 .startDate(new SimpleDateFormat("dd/MM/yyyy").format(Date.from(employee.getStartDate())))

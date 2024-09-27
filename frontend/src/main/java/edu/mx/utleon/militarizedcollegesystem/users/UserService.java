@@ -1,7 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.users;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserPersonDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,23 +18,23 @@ public class UserService {
     @Value("${microservices.url.users}")
     private String USERS_URL;
 
-    public UserPersonDto getByUsername(String username) {
+    public UserDto getByUsername(String username) {
         String path = USERS_URL + "user?username=" + username;
-        return restTemplate.getForObject(path, UserPersonDto.class);
+        return restTemplate.getForObject(path, UserDto.class);
     }
 
-    public UserPersonDto getUserById(Long id) {
+    public UserDto getUserById(Long id) {
         String path = USERS_URL + "user?id=" + id;
-        return restTemplate.getForObject(path, UserPersonDto.class);
+        return restTemplate.getForObject(path, UserDto.class);
     }
 
-    public List<UserPersonDto> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         String path = USERS_URL + "users";
         return restTemplate.getForObject(path, List.class);
     }
 
-    public UserPersonDto updateAccount(UserPersonDto user) {
+    public UserDto updateAccount(UserDto user) {
         String path = USERS_URL + "account";
-        return restTemplate.postForObject(path, user, UserPersonDto.class);
+        return restTemplate.postForObject(path, user, UserDto.class);
     }
 }

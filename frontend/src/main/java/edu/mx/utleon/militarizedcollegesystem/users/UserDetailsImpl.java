@@ -1,7 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.users;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserPersonDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
-    private UserPersonDto user;
+    private UserDto user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

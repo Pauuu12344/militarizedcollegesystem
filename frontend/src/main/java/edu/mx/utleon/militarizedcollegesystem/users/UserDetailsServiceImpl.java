@@ -1,7 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.users;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserPersonDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String path = USERS_URL + "user?username=" + username;
-        UserPersonDto user = restTemplate.getForObject(path , UserPersonDto.class);
+        UserDto user = restTemplate.getForObject(path , UserDto.class);
         if(user == null) throw new UsernameNotFoundException("Username not found");
         return new UserDetailsImpl(user);
     }

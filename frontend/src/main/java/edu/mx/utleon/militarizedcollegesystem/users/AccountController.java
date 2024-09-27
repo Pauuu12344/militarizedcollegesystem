@@ -1,7 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.users;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserPersonDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,7 +24,7 @@ public class AccountController {
     }
 
     @PostMapping("/account")
-    public String updateAccount(UserPersonDto user) {
+    public String updateAccount(UserDto user) {
         userService.updateAccount(user);
         return "redirect:/account";
     }

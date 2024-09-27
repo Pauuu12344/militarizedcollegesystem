@@ -1,6 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.staff.staff;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeePersonDto;
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeeDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
     @GetMapping("/employees")
-    public List<EmployeePersonDto> getAllEmployees() {
+    public List<EmployeeDto> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 }
