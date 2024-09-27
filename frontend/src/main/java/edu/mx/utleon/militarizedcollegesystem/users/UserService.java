@@ -1,5 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.users;
 
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserPersonDto;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,23 +19,23 @@ public class UserService {
     @Value("${microservices.url.users}")
     private String USERS_URL;
 
-    public User getByUsername(String username) {
+    public UserPersonDto getByUsername(String username) {
         String path = USERS_URL + "user?username=" + username;
-        return restTemplate.getForObject(path, User.class);
+        return restTemplate.getForObject(path, UserPersonDto.class);
     }
 
-    public User getUserById(Long id) {
+    public UserPersonDto getUserById(Long id) {
         String path = USERS_URL + "user?id=" + id;
-        return restTemplate.getForObject(path, User.class);
+        return restTemplate.getForObject(path, UserPersonDto.class);
     }
 
-    public List<User> getAllUsers() {
+    public List<UserPersonDto> getAllUsers() {
         String path = USERS_URL + "users";
         return restTemplate.getForObject(path, List.class);
     }
 
-    public User updateAccount(User user) {
+    public UserPersonDto updateAccount(UserPersonDto user) {
         String path = USERS_URL + "account";
-        return restTemplate.postForObject(path, user, User.class);
+        return restTemplate.postForObject(path, user, UserPersonDto.class);
     }
 }

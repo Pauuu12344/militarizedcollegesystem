@@ -1,6 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.users.users;
 
-import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserPersonDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user")
-    public User getUser(
+    public UserPersonDto getUser(
             @RequestParam(required = false) Long id,
             @RequestParam(required = false) String username
     ) {
@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
+    public List<UserPersonDto> getAllUsers() {
         return userService.getAllUsers();
     }
 

@@ -1,5 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.users;
 
+import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserPersonDto;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,7 +16,7 @@ public class AccountController {
     private UserService userService;
 
     @GetMapping("/account")
-    public String viewaAccount(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+    public String viewAccount(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
         model.addAttribute(
                 "user",
                 userService.getByUsername(userDetails.getUsername())
@@ -24,7 +25,7 @@ public class AccountController {
     }
 
     @PostMapping("/account")
-    public String updateAccount(User user) {
+    public String updateAccount(UserPersonDto user) {
         userService.updateAccount(user);
         return "redirect:/account";
     }
