@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="~{fragments :: head('Acceso')}"></head>
 <body>
-<div class="p-3 text-center">
+<div class="p-5 text-center">
     <img th:src="@{/img/mexico.png}" alt="Escudo de México"/>
 </div>
-<div class="container-fluid d-flex justify-content-center">
-    <form class="w-50 p-3" method="post" th:action="@{/login}">
-        <div class="border border-dark rounded p-3">
+<div class="container-fluid d-flex justify-content-center w-50">
+    <form method="post" th:action="@{/login}">
+        <div class="border rounded p-3">
             <p class="text-center">Acceso al Sistema de Colegios Militarizados</p>
             <p>
                 <input class="form-control" type="text" name="username" placeholder="Nombre de Usuario" required
