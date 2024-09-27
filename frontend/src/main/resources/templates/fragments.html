@@ -33,31 +33,49 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${currentPage == 'home'} ? 'fs-2'" th:href="@{/}">Inicio</a>
+                    <a class="nav-link" th:classappend="${currentPage == 'home'} ? 'fs-5'" th:href="@{/}">
+                        <i class="fa-solid fa-house"></i>
+                        Inicio
+                    </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAuthority('TECNOLOGIAS_DE_LA_INFORMACION')">
-                    <a class="nav-link" th:classappend="${currentPage == 'users'} ? 'fs-2'"
-                       th:href="@{/users}">Usuarios</a>
+                    <a class="nav-link" th:classappend="${currentPage == 'users'} ? 'fs-5'"
+                       th:href="@{/users}">
+                        <i class="fa-solid fa-user"></i>
+                        Usuarios
+                    </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAuthority('TECNOLOGIAS_DE_LA_INFORMACION')">
-                    <a class="nav-link" th:classappend="${currentPage == 'roles'} ? 'fs-2'"
-                       th:href="@{/roles}">Roles</a>
+                    <a class="nav-link" th:classappend="${currentPage == 'roles'} ? 'fs-5'"
+                       th:href="@{/roles}">
+                        <i class="fa-solid fa-users"></i>
+                        Roles
+                    </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAuthority('RECURSOS_HUMANOS')">
-                    <a class="nav-link" th:classappend="${currentPage == 'staff'} ? 'fs-2'"
-                       th:href="@{/staff}">Personal</a>
+                    <a class="nav-link" th:classappend="${currentPage == 'staff'} ? 'fs-5'"
+                       th:href="@{/staff}">
+                        <i class="fa-solid fa-users"></i>
+                        Personal
+                    </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAuthority('SERVICIOS_ESCOLARES')">
-                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'"
-                       th:href="@{/applicants}">Aspirantes</a>
+                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-5'"
+                       th:href="@{/applicants}">
+                        <i class="fa-solid fa-handshake"></i>
+                        Aspirantes
+                    </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAuthority('SERVICIOS_ESCOLARES')">
-                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-2'" th:href="@{/periods}">Periodos</a>
+                    <a class="nav-link" th:classappend="${currentPage == 'applicants'} ? 'fs-5'" th:href="@{/periods}">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Periodos
+                    </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
@@ -65,16 +83,22 @@
                             'PROFESOR',
                             'SERVICIOS_ESCOLARES',
                 )">
-                    <a class="nav-link" th:classappend="${currentPage == 'grades'} ? 'fs-2'"
-                       th:href="@{/grades}">Calificaciones</a>
+                    <a class="nav-link" th:classappend="${currentPage == 'grades'} ? 'fs-5'"
+                       th:href="@{/grades}">
+                        <i class="fa-solid fa-list"></i>
+                        Calificaciones
+                    </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
                             'PROFESOR',
                             'SERVICIOS_ESCOLARES',
                 )">
-                    <a class="nav-link" th:classappend="${currentPage == 'groups'} ? 'fs-2'"
-                       th:href="@{/groups}">Grupos</a>
+                    <a class="nav-link" th:classappend="${currentPage == 'groups'} ? 'fs-5'"
+                       th:href="@{/groups}">
+                        <i class="fa-solid fa-user-group"></i>
+                        Grupos
+                    </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
@@ -84,8 +108,11 @@
                             'RECURSOS_HUMANOS',
                             'TECNOLOGIAS_DE_LA_INFORMACION'
                 )">
-                    <a class="nav-link" th:classappend="${currentPage == 'scholarships'} ? 'fs-2'"
-                       th:href="@{/scholarships}">Becas</a>
+                    <a class="nav-link" th:classappend="${currentPage == 'scholarships'} ? 'fs-5'"
+                       th:href="@{/scholarships}">
+                        <i class="fa-solid fa-comments-dollar"></i>
+                        Becas
+                    </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority(
@@ -95,18 +122,21 @@
                             'RECURSOS_HUMANOS',
                             'TECNOLOGIAS_DE_LA_INFORMACION'
                 )">
-                    <a class="nav-link" th:classappend="${currentPage == 'account'} ? 'fs-2'"
-                       th:href="@{/account}">Cuenta</a>
-                </li>
-
-                <br/>
-
-                <li class="nav-item m-3">
-                    <form method="post" name="logoutForm" th:action="@{/logout}">
-                        <button type="submit" class="dropdown-item text-white">Salir</button>
-                    </form>
+                    <a class="nav-link" th:classappend="${currentPage == 'account'} ? 'fs-5'"
+                       th:href="@{/account}">
+                        <i class="fa-solid fa-circle-user"></i>
+                        Cuenta
+                    </a>
                 </li>
             </ul>
+            <div class="nav-item m-3 ms-auto">
+                <form method="post" name="logoutForm" th:action="@{/logout}">
+                    <button type="submit" class="dropdown-item text-white">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Salir
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
