@@ -25,11 +25,11 @@ public class Personnel {
     @Column(nullable = false, name = "start_date")
     private Instant startDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "contract_id", referencedColumnName = "id")
     private Contract contract;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "area_id", referencedColumnName = "id")
     private Area area;
 
