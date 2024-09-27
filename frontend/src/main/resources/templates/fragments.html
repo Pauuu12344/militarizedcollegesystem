@@ -83,6 +83,17 @@
                        th:href="@{/scholarships}">Becas</a>
                 </li>
 
+                <li class="nav-item" sec:authorize="hasAnyAuthority(
+                            'ESTUDIANTE',
+                            'PROFESOR',
+                            'SERVICIOS_ESCOLARES',
+                            'RECURSOS_HUMANOS',
+                            'TECNOLOGIAS_DE_LA_INFORMACION'
+                )">
+                    <a class="nav-link" th:classappend="${currentPage == 'account'} ? 'fs-2'"
+                       th:href="@{/account}">Cuenta</a>
+                </li>
+
                 <br/>
 
                 <li class="nav-item">

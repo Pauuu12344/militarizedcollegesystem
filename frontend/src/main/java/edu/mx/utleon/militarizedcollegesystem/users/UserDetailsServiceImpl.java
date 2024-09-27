@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String path = USERS_URL + "users/" + username;
+        String path = USERS_URL + "user?username=" + username;
         User user = restTemplate.getForObject(path , User.class);
         if(user == null) throw new UsernameNotFoundException("Username not found");
         return new UserDetailsImpl(user);

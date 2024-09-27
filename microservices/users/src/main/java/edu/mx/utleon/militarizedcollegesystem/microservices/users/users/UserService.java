@@ -1,13 +1,10 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.users.users;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserPersonDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Person;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -19,25 +16,26 @@ public class UserService {
         return userRepository.findByUsername(username).orElse(null);
     }
 
-    public List<UserPersonDto> getAllUsers() {
-        return ((List<User>) userRepository.findAll()).stream()
-                .map(this::buildPersonDto)
-                .collect(Collectors.toList());
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
-    private UserPersonDto buildPersonDto(User user) {
-        return UserPersonDto.builder()
-                .userId(user.getId())
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .email(user.getEmail())
-                .active(user.isActive())
-                .role(user.getRole().getName())
-                .personId(user.getPerson().getId())
-                .fullName(user.getPerson().getFullName())
-                .phone(user.getPerson().getPhone())
-                .curp(user.getPerson().getCurp())
-                .build();
+    public List<User> getAllUsers() {
+        return (List<User>) userRepository.findAll();
+    }
+
+    public User updateAccount(User user) {
+        User savedUser = userRepository.findById(user.getId()).get();
+        System.out.println(user);
+        if(!user.getPassword().isEmpty()) {
+            savedUser.setPassword(user.getPassword());
+        }
+        savedUser.setUsername(user.getUsername());
+        savedUser.setEmail(user.getEmail());
+        savedUser.getPerson().setFullName(user.getPerson().getFullName());
+        savedUser.getPerson().setCurp(user.getPerson().getCurp());
+        savedUser.getPerson().setPhone(user.getPerson().getPhone());
+        return userRepository.save(savedUser);
     }
 
 }
