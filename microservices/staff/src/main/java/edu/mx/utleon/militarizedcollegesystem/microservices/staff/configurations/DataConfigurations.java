@@ -59,28 +59,24 @@ public class DataConfigurations {
         Person personInformationTechnologies = createPerson(Person.builder()
                 .curp("XXXX000000XXXXXXX4")
                 .fullName("Information Technologies")
-                .email("")
                 .phone(4771234567L)
                 .build());
 
         Person personTeacher = createPerson(Person.builder()
                 .curp("XXXX000000XXXXXXX1")
                 .fullName("Teacher")
-                .email("")
                 .phone(4771234567L)
                 .build());
 
         Person personHumanResources = createPerson(Person.builder()
                 .curp("XXXX000000XXXXXXX2")
                 .fullName("Human Resources")
-                .email("")
                 .phone(4771234567L)
                 .build());
 
         Person personSchoolServices = createPerson(Person.builder()
                 .curp("XXXX000000XXXXXXX3")
                 .fullName("School Services")
-                .email("")
                 .phone(4771234567L)
                 .build());
 

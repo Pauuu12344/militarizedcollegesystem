@@ -22,9 +22,6 @@ public class Person {
     @Column(nullable = false)
     private Long phone;
 
-    @Column(nullable = false)
-    private String email;
-
     @Column(nullable = false, unique = true)
     private String curp;
 
