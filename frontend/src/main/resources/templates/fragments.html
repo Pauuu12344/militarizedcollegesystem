@@ -41,6 +41,11 @@
                        th:href="@{/users}">Usuarios</a>
                 </li>
 
+                <li class="nav-item" sec:authorize="hasAuthority('TECNOLOGIAS_DE_LA_INFORMACION')">
+                    <a class="nav-link" th:classappend="${currentPage == 'roles'} ? 'fs-2'"
+                       th:href="@{/roles}">Roles</a>
+                </li>
+
                 <li class="nav-item" sec:authorize="hasAuthority('RECURSOS_HUMANOS')">
                     <a class="nav-link" th:classappend="${currentPage == 'staff'} ? 'fs-2'"
                        th:href="@{/staff}">Personal</a>
@@ -96,7 +101,7 @@
 
                 <br/>
 
-                <li class="nav-item">
+                <li class="nav-item m-3">
                     <form method="post" name="logoutForm" th:action="@{/logout}">
                         <button type="submit" class="dropdown-item text-white">Salir</button>
                     </form>
