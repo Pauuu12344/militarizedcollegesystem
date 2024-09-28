@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class ApplicantService {
 
@@ -31,4 +33,19 @@ public class ApplicantService {
         return restTemplate.getForObject(path, Period.class);
     }
 
+    public List<ApplicantDto> getAllPeriodApplicants() {
+        Period currentPeriod = getCurrentPeriod();
+        String path = ADMISSIONS_URL + "applicants?periodId=" + currentPeriod.getId();
+        return restTemplate.getForObject(path, List.class);
+    }
+
+    public List<ApplicantDto> getAllApplicants() {
+        String path = ADMISSIONS_URL + "applicants";
+        return restTemplate.getForObject(path, List.class);
+    }
+
+    public void updateApplicantStatus(Long id, String status) {
+        String path = ADMISSIONS_URL + "applicants?id=" + id + "&status=" + status;
+        restTemplate.put(path, status);
+    }
 }

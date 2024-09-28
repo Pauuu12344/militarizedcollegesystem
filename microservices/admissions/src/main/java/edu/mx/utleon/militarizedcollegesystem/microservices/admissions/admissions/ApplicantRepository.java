@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ApplicantRepository extends CrudRepository<Applicant, Long> {
 
+    Iterable<Applicant> findAllByPeriodId(Long periodId);
+
 }

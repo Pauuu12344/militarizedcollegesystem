@@ -20,5 +20,5 @@ public class ApplicantDto {
     private String career;
     private Long periodId;
     private int period;
-    private boolean status;
+    private String status;
 }
