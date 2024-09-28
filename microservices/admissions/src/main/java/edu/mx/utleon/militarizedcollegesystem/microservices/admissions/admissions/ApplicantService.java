@@ -121,10 +121,10 @@ public class ApplicantService {
                         .personId(applicant.getPersonId())
                         .build())
                 ;
-                applicantRepository.save(applicant);
             } else if (status.equals(Status.RECHAZADO.name())) {
                 applicant.setStatus(Status.RECHAZADO.name());
             }
+            applicantRepository.save(applicant);
         }
     }
 }
