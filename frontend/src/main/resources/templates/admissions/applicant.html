@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments :: head('Tu Futuro, Nuestro Compromiso')}"/>
+<body>
+<div class="p-5 text-center">
+    <a th:href="@{/login}">
+        <img th:src="@{/img/mexico.png}" alt="Escudo de México"/>
+    </a>
+</div>
+
+<div class="container-fluid d-flex align-items-center justify-content-center w-75">
+    <div class="text-center">
+        <h1 class="display-4 mb-4 fw-bolder">Forja tu futuro en los Colegios Militarizados</h1>
+        <div class="mb-4">
+            <img th:src="@{/img/colegiomilitar.jpg}" alt="Heroico Colegio Militar" class="img-fluid w-auto">
+        </div>
+        <p class="lead mb-4">Únete a una institución de honor, valor y patriotismo. Desarrolla tus habilidades, sirve a
+            tu país y construye una carrera llena de oportunidades.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <p class="mb-4 fw-light">Como cadete, tendrás acceso a:</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check-circle text-success me-2"></i>Educación de clase mundial</li>
+                    <li><i class="fas fa-check-circle text-success me-2"></i>Entrenamiento físico y mental de élite</li>
+                    <li><i class="fas fa-check-circle text-success me-2"></i>Oportunidades de liderazgo</li>
+                    <li><i class="fas fa-check-circle text-success me-2"></i>Becas y apoyo financiero</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-5">
+            <a th:href="@{/applicant/apply}" class="btn btn-custom btn-lg m-4">
+                <i class="fas fa-user-plus"></i> Quiero Ingresar
+            </a>
+            <a href="#" class="btn btn-outline-success btn-lg m-4">
+                <i class="fas fa-list"></i> Ver Resultados
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments :: footer}"/>
+
+<script th:src="@{/js/account-form.js}"></script>
+</body>
+</html>

@@ -8,6 +8,7 @@ import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Person;
 import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.academics.CareerRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.academics.PeriodRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.users.PersonRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,13 +35,14 @@ public class ApplicantService {
                 .collect(java.util.stream.Collectors.toList());
     }
 
+    @Transactional
     public ApplicantDto createApplicant(ApplicantDto applicantDto) {
         Person person = personRepository.save(
                 Person.builder()
-                .fullName(applicantDto.getFullName())
-                .phone(applicantDto.getPhone())
-                .curp(applicantDto.getCurp())
-                .build()
+                        .fullName(applicantDto.getFullName())
+                        .phone(applicantDto.getPhone())
+                        .curp(applicantDto.getCurp())
+                        .build()
         );
 
         Career career = careerRepository.findById(applicantDto.getCareerId()).orElse(null);
@@ -48,11 +50,12 @@ public class ApplicantService {
 
         return buildApplicantDto(applicantRepository.save(
                 Applicant.builder()
-                .personId(person.getId())
-                .careerId(career.getId())
-                .periodId(period.getId())
-                .status(false)
-                .build()
+                        .email(applicantDto.getEmail())
+                        .personId(person.getId())
+                        .careerId(career.getId())
+                        .periodId(period.getId())
+                        .status(false)
+                        .build()
         ));
     }
 
@@ -63,6 +66,7 @@ public class ApplicantService {
         return ApplicantDto.builder()
                 .applicantId(applicant.getId())
                 .enrollment(applicant.getEnrollment())
+                .email(applicant.getEmail())
                 .personId(person.getId())
                 .fullName(person.getFullName())
                 .phone(person.getPhone())
@@ -70,7 +74,7 @@ public class ApplicantService {
                 .careerId(career.getId())
                 .career(career.getName())
                 .periodId(period.getId())
-                .period(period.getName())
+                .period(period.getStartYear())
                 .build();
     }
 

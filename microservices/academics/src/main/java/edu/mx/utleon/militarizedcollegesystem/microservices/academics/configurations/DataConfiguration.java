@@ -52,7 +52,7 @@ public class DataConfiguration {
         Career careerTecnologiasInformacion = createCareer("Tecnologías de la Información");
 
         Period period2024 = createPeriod(Period.builder()
-                .name("2024")
+                .startYear(2024)
                 .description("Perido 2024")
                 .active(true)
                 .build());
@@ -97,7 +97,7 @@ public class DataConfiguration {
 
     @Transactional
     protected Period createPeriod(Period period) {
-        Period newPeriod = periodRepository.findByName(period.getName()).orElse(null);
+        Period newPeriod = periodRepository.findByStartYear(period.getStartYear()).orElse(null);
         if (newPeriod == null)
             periodRepository.save(period);
         return newPeriod;

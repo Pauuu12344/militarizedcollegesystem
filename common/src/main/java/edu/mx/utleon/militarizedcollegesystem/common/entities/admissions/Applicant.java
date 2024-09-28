@@ -20,6 +20,9 @@ public class Applicant {
     @Column(nullable = false)
     private String enrollment;
 
+    @Column(nullable = false)
+    private String email;
+
     @Column(nullable = false, name = "person_id")
     private Long personId;
 

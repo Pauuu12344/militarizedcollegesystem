@@ -22,3 +22,9 @@
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
+
+.hero-section {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 3rem;
+    border-radius: 15px;
+}

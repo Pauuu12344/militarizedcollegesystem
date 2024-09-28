@@ -25,6 +25,11 @@ public class SecurityConfiguration {
             authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/img/**", "/css/**", "/js/**", "/webjars/**", "/favicon.svg")
                     .permitAll();
+
+            authorizationManagerRequestMatcherRegistry
+                    .requestMatchers("/applicant/**")
+                    .permitAll();
+
             authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/users/**")
                     .hasAuthority(Roles.TECNOLOGIAS_DE_LA_INFORMACION.name())

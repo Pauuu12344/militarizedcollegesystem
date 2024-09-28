@@ -19,6 +19,7 @@ public class ApplicantController {
 
     @PostMapping("/applicants")
     public ApplicantDto createApplicant(@RequestBody ApplicantDto applicantDto) {
+        System.out.println(applicantDto);
         return applicantService.createApplicant(applicantDto);
     }
 

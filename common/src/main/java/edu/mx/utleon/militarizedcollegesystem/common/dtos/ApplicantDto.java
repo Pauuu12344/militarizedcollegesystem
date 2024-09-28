@@ -11,6 +11,7 @@ import lombok.*;
 public class ApplicantDto {
     private Long applicantId;
     private String enrollment;
+    private String email;
     private Long personId;
     private String fullName;
     private Long phone;
@@ -18,6 +19,6 @@ public class ApplicantDto {
     private Long careerId;
     private String career;
     private Long periodId;
-    private String period;
+    private int period;
     private boolean status;
 }

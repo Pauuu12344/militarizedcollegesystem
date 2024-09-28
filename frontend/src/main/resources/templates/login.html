@@ -5,7 +5,7 @@
 <div class="p-5 text-center">
     <img th:src="@{/img/mexico.png}" alt="Escudo de México"/>
 </div>
-<div class="container-fluid d-flex justify-content-center w-50">
+<div class="container-fluid d-flex flex-column justify-content-center w-50">
     <form method="post" th:action="@{/login}">
         <div class="border rounded p-3">
             <p class="text-center">Acceso al Sistema de Colegios Militarizados</p>
@@ -30,6 +30,9 @@
             <button class="btn btn-success w-100" type="submit" value="Login">Ingresar</button>
         </div>
     </form>
+    <div class="text-center mt-3">
+        <a class="btn btn-sm btn-outline-success mt-3" th:href="@{/applicant}">Soy Aspirante</a>
+    </div>
 </div>
 <div th:replace="~{fragments :: footer}"/>
 </body>
