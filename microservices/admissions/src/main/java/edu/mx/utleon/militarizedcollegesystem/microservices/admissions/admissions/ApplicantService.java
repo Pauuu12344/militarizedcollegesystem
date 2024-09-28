@@ -3,6 +3,7 @@ package edu.mx.utleon.militarizedcollegesystem.microservices.admissions.admissio
 import edu.mx.utleon.militarizedcollegesystem.common.dtos.ApplicantDto;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Career;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Period;
+import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Student;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.admissions.Applicant;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.admissions.Status;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Person;
@@ -11,6 +12,7 @@ import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Roles;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
 import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.academics.CareerRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.academics.PeriodRepository;
+import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.academics.StudentRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.users.PersonRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.users.RoleRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.admissions.users.UserRepository;
@@ -38,6 +40,8 @@ public class ApplicantService {
     private RoleRepository roleRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
     public List<ApplicantDto> getAllApplicants() {
         return ((List<Applicant>) applicantRepository.findAll()).stream()
@@ -112,6 +116,11 @@ public class ApplicantService {
                         .person(personStudent)
                         .build()
                 );
+                studentRepository.save(Student.builder()
+                        .enrollment(applicant.getEnrollment())
+                        .personId(applicant.getPersonId())
+                        .build())
+                ;
                 applicantRepository.save(applicant);
             } else if (status.equals(Status.RECHAZADO.name())) {
                 applicant.setStatus(Status.RECHAZADO.name());
