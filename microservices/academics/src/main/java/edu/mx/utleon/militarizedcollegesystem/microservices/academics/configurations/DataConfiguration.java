@@ -65,6 +65,8 @@ public class DataConfiguration {
 
         Student studentStudent = createStudent(Student.builder()
                 .enrollment("0000000000")
+                .career(careerAdministracionMilitar)
+                .period(period2024)
                 .personId(personStudent.getId())
                 .build());
 

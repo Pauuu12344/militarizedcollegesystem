@@ -21,6 +21,14 @@ public class Student {
     @Column(nullable = false)
     private String enrollment;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "career_id", nullable = false)
+    private Career career;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "period_id", nullable = false)
+    private Period period;
+
     @Column(nullable = false, name = "person_id")
     private Long personId;
 

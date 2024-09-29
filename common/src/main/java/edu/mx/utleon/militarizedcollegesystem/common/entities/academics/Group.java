@@ -22,14 +22,6 @@ public class Group {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "career_id", nullable = false)
-    private Career career;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "period_id", nullable = false)
-    private Period period;
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "Group_Student",

@@ -73,6 +73,45 @@ public class ApplicantService {
         ));
     }
 
+    public List<ApplicantDto> getAllPeriodApplicants(Long periodId) {
+        return ((List<Applicant>) applicantRepository.findAllByPeriodId(periodId)).stream()
+                .map(this::buildApplicantDto)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+    @Transactional
+    public void updateApplicantStatus(Long id, String status) {
+        Applicant applicant = applicantRepository.findById(id).orElse(null);
+        if (applicant != null) {
+            if (status.equals(Status.ACEPTADO.name())) {
+                applicant.setStatus(Status.ACEPTADO.name());
+                Person personStudent = personRepository.findById(applicant.getPersonId()).orElse(null);
+                Role roleStudent = roleRepository.findByName(Roles.ESTUDIANTE.name()).orElse(null);
+                Career career = careerRepository.findById(applicant.getCareerId()).orElse(null);
+                Period period = periodRepository.findById(applicant.getPeriodId()).orElse(null);
+                userRepository.save(User.builder()
+                        .email(applicant.getEmail())
+                        .username(applicant.getEnrollment())
+                        .password(applicant.getEnrollment())
+                        .role(roleStudent)
+                        .active(true)
+                        .person(personStudent)
+                        .build()
+                );
+                studentRepository.save(Student.builder()
+                        .enrollment(applicant.getEnrollment())
+                        .career(career)
+                        .period(period)
+                        .personId(applicant.getPersonId())
+                        .build())
+                ;
+            } else if (status.equals(Status.RECHAZADO.name())) {
+                applicant.setStatus(Status.RECHAZADO.name());
+            }
+            applicantRepository.save(applicant);
+        }
+    }
+
     public ApplicantDto buildApplicantDto(Applicant applicant) {
         Person person = personRepository.findById(applicant.getPersonId()).orElse(null);
         Career career = careerRepository.findById(applicant.getCareerId()).orElse(null);
@@ -93,38 +132,4 @@ public class ApplicantService {
                 .build();
     }
 
-    public List<ApplicantDto> getAllPeriodApplicants(Long periodId) {
-        return ((List<Applicant>) applicantRepository.findAllByPeriodId(periodId)).stream()
-                .map(this::buildApplicantDto)
-                .collect(java.util.stream.Collectors.toList());
-    }
-
-    @Transactional
-    public void updateApplicantStatus(Long id, String status) {
-        Applicant applicant = applicantRepository.findById(id).orElse(null);
-        if (applicant != null) {
-            if (status.equals(Status.ACEPTADO.name())) {
-                applicant.setStatus(Status.ACEPTADO.name());
-                Person personStudent = personRepository.findById(applicant.getPersonId()).orElse(null);
-                Role roleStudent = roleRepository.findByName(Roles.ESTUDIANTE.name()).orElse(null);
-                userRepository.save(User.builder()
-                        .email(applicant.getEmail())
-                        .username(applicant.getEnrollment())
-                        .password(applicant.getEnrollment())
-                        .role(roleStudent)
-                        .active(true)
-                        .person(personStudent)
-                        .build()
-                );
-                studentRepository.save(Student.builder()
-                        .enrollment(applicant.getEnrollment())
-                        .personId(applicant.getPersonId())
-                        .build())
-                ;
-            } else if (status.equals(Status.RECHAZADO.name())) {
-                applicant.setStatus(Status.RECHAZADO.name());
-            }
-            applicantRepository.save(applicant);
-        }
-    }
 }
