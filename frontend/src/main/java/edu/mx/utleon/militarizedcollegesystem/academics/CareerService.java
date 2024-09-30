@@ -1,4 +1,4 @@
-package edu.mx.utleon.militarizedcollegesystem.admissions;
+package edu.mx.utleon.militarizedcollegesystem.academics;
 
 import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Career;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +22,8 @@ public class CareerService {
         return restTemplate.getForObject(path, List.class);
     }
 
+    public Career getCareerById(Long careerId) {
+        String path = ACADEMICS_URL + "career?id=" + careerId;
+        return restTemplate.getForObject(path, Career.class);
+    }
 }

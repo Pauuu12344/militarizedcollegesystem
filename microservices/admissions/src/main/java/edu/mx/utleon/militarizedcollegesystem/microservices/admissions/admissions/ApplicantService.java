@@ -44,9 +44,10 @@ public class ApplicantService {
     private StudentRepository studentRepository;
 
     public List<ApplicantDto> getAllApplicants() {
-        return ((List<Applicant>) applicantRepository.findAll()).stream()
+        return ((List<Applicant>) applicantRepository.findAll())
+                .stream()
                 .map(this::buildApplicantDto)
-                .collect(java.util.stream.Collectors.toList());
+                .toList();
     }
 
     @Transactional
@@ -74,9 +75,10 @@ public class ApplicantService {
     }
 
     public List<ApplicantDto> getAllPeriodApplicants(Long periodId) {
-        return ((List<Applicant>) applicantRepository.findAllByPeriodId(periodId)).stream()
+        return ((List<Applicant>) applicantRepository.findAllByPeriodId(periodId))
+                .stream()
                 .map(this::buildApplicantDto)
-                .collect(java.util.stream.Collectors.toList());
+                .toList();
     }
 
     @Transactional
@@ -84,7 +86,6 @@ public class ApplicantService {
         Applicant applicant = applicantRepository.findById(id).orElse(null);
         if (applicant != null) {
             if (status.equals(Status.ACEPTADO.name())) {
-                applicant.setStatus(Status.ACEPTADO.name());
                 Person personStudent = personRepository.findById(applicant.getPersonId()).orElse(null);
                 Role roleStudent = roleRepository.findByName(Roles.ESTUDIANTE.name()).orElse(null);
                 Career career = careerRepository.findById(applicant.getCareerId()).orElse(null);
@@ -105,6 +106,7 @@ public class ApplicantService {
                         .personId(applicant.getPersonId())
                         .build())
                 ;
+                applicant.setStatus(Status.ACEPTADO.name());
             } else if (status.equals(Status.RECHAZADO.name())) {
                 applicant.setStatus(Status.RECHAZADO.name());
             }

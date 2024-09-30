@@ -3,6 +3,8 @@ package edu.mx.utleon.militarizedcollegesystem.common.entities.academics;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Collection;
+
 @Entity
 @Getter
 @Setter
@@ -19,4 +21,11 @@ public class Career {
     @Column(nullable = false)
     private String name;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "Career_Subject",
+            joinColumns = @JoinColumn(name = "career_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    )
+    private Collection<Subject> subjects;
 }

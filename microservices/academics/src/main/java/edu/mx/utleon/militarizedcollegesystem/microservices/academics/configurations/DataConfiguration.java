@@ -3,6 +3,7 @@ package edu.mx.utleon.militarizedcollegesystem.microservices.academics.configura
 import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Career;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Period;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Student;
+import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Subject;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Person;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Role;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Roles;
@@ -10,6 +11,7 @@ import edu.mx.utleon.militarizedcollegesystem.common.entities.users.User;
 import edu.mx.utleon.militarizedcollegesystem.microservices.academics.academics.CareerRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.academics.academics.PeriodRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.academics.academics.StudentRepository;
+import edu.mx.utleon.militarizedcollegesystem.microservices.academics.academics.SubjectRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.academics.users.PersonRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.academics.users.RoleRepository;
 import edu.mx.utleon.militarizedcollegesystem.microservices.academics.users.UserRepository;
@@ -18,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class DataConfiguration {
@@ -39,23 +43,59 @@ public class DataConfiguration {
 
     @Autowired
     private PeriodRepository periodRepository;
+    @Autowired
+    private SubjectRepository subjectRepository;
 
     @Transactional
     @EventListener
     public void createData(ApplicationReadyEvent event) {
-        Role roleEstudiante = createRole(Roles.ESTUDIANTE.name());
-
-        Career careerAdministracionMilitar = createCareer("Administración Militar");
-        Career careerSeguridadPublica = createCareer("Seguridad Pública");
-        Career careerMedicoCirujanoMilitary = createCareer("Médico Cirujano Militar");
-        Career careerIngenieriaMilitar = createCareer("Ingeniería Militar");
-        Career careerTecnologiasInformacion = createCareer("Tecnologías de la Información");
-
         Period period2024 = createPeriod(Period.builder()
                 .startYear(2024)
                 .description("Perido 2024")
                 .active(true)
                 .build());
+
+        Role roleEstudiante = createRole(Roles.ESTUDIANTE.name());
+
+        Subject subjectMatematicas = createSubject("Matemáticas");
+        Subject subjectFisica = createSubject("Física");
+        Subject subjectQuimica = createSubject("Química");
+        Subject subjectBiologia = createSubject("Biología");
+        Subject subjectHistoria = createSubject("Historia");
+        Subject subjectGeografia = createSubject("Geografía");
+        Subject subjectProgramacion = createSubject("Programación");
+
+        Career careerAdministracionMilitar = createCareer(Career
+                .builder()
+                .name("Administración Militar")
+                .subjects(List.of(subjectMatematicas, subjectHistoria, subjectGeografia))
+                .build()
+        );
+        Career careerSeguridadPublica = createCareer(Career
+                .builder()
+                .name("Seguridad Pública")
+                .subjects(List.of(subjectMatematicas, subjectHistoria, subjectGeografia))
+                .build()
+        );
+        Career careerMedicoCirujanoMilitary = createCareer(Career
+                .builder()
+                .name("Médico Cirujano Militar")
+                .subjects(List.of(subjectMatematicas, subjectQuimica, subjectBiologia))
+                .build()
+        );
+        Career careerIngenieriaMilitar = createCareer(Career
+                .builder()
+                .name("Ingeniería Militar")
+                .subjects(List.of(subjectMatematicas, subjectFisica))
+                .build()
+        );
+
+        Career careerTecnologiasInformacion = createCareer(Career
+                .builder()
+                .name("Tecnologías de la Información")
+                .subjects(List.of(subjectMatematicas, subjectProgramacion))
+                .build()
+        );
 
         Person personStudent = createPerson(Person.builder()
                 .curp("XXXX000000XXXXXXX0")
@@ -101,7 +141,7 @@ public class DataConfiguration {
     protected Period createPeriod(Period period) {
         Period newPeriod = periodRepository.findByStartYear(period.getStartYear()).orElse(null);
         if (newPeriod == null)
-            periodRepository.save(period);
+            newPeriod = periodRepository.save(period);
         return newPeriod;
     }
 
@@ -114,10 +154,10 @@ public class DataConfiguration {
     }
 
     @Transactional
-    protected Career createCareer(String name) {
-        Career newCareer = careerRepository.findByName(name).orElse(null);
+    protected Career createCareer(Career career) {
+        Career newCareer = careerRepository.findByName(career.getName()).orElse(null);
         if (newCareer == null)
-            newCareer = careerRepository.save(Career.builder().name(name).build());
+            newCareer = careerRepository.save(career);
         return newCareer;
     }
 
@@ -127,6 +167,15 @@ public class DataConfiguration {
         if (newRole == null)
             newRole = roleRepository.save(Role.builder().name(name).build());
         return newRole;
+    }
+
+    @Transactional
+    protected Subject createSubject(String name) {
+        Subject newSubject = subjectRepository.findByName(name).orElse(null);
+        if (newSubject == null) {
+            newSubject = subjectRepository.save(Subject.builder().name(name).build());
+        }
+        return newSubject;
     }
 
 

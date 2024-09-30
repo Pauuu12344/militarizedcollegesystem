@@ -1,5 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.admissions;
 
+import edu.mx.utleon.militarizedcollegesystem.academics.PeriodService;
 import edu.mx.utleon.militarizedcollegesystem.common.dtos.ApplicantDto;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Period;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +22,18 @@ public class ApplicantService {
     @Value("${microservices.url.academics}")
     private String ACADEMICS_URL;
 
+    @Autowired
+    private PeriodService periodService;
+
     public ApplicantDto createApplicant(ApplicantDto applicantDto) {
         String path = ADMISSIONS_URL + "applicants";
-        Period currentPeriod = getCurrentPeriod();
+        Period currentPeriod = periodService.getCurrentPeriod();
         applicantDto.setPeriodId(currentPeriod.getId());
         return restTemplate.postForObject(path, applicantDto, ApplicantDto.class);
     }
 
-    public Period getCurrentPeriod() {
-        String path = ACADEMICS_URL + "period";
-        return restTemplate.getForObject(path, Period.class);
-    }
-
     public List<ApplicantDto> getAllPeriodApplicants() {
-        Period currentPeriod = getCurrentPeriod();
+        Period currentPeriod = periodService.getCurrentPeriod();
         String path = ADMISSIONS_URL + "applicants?periodId=" + currentPeriod.getId();
         return restTemplate.getForObject(path, List.class);
     }

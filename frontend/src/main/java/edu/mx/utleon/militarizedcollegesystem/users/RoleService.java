@@ -20,7 +20,9 @@ public class RoleService {
 
     public List<Role> getAllRoles() {
         String path = USERS_URL + "roles";
-        return restTemplate.getForObject(path, List.class);
+        List<Role> roles = restTemplate.getForObject(path, List.class);
+        roles.stream().filter(role -> role.getName().equals(Roles.ESTUDIANTE.name()));
+        return roles;
     }
 
 }

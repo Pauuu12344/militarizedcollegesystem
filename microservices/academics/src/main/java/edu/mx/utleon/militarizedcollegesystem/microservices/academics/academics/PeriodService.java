@@ -4,6 +4,9 @@ import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 public class PeriodService {
 
@@ -15,8 +18,10 @@ public class PeriodService {
     }
 
     public Period getCurrentPeriod() {
-        int year = java.time.LocalDate.now().getYear();
-        return periodRepository.findByStartYear(year).orElse(null);
+        return periodRepository.findByStartYear(LocalDate.now().getYear()).orElse(null);
     }
 
+    public List<Period> getAllPeriods() {
+        return (List<Period>) periodRepository.findAll();
+    }
 }

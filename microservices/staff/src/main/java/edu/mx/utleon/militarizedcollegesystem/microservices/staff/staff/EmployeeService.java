@@ -49,9 +49,10 @@ public class EmployeeService {
     private AreaRepository areaRepository;
 
     public List<EmployeeDto> getAllEmployees() {
-        return ((List<Employee>) employeeRepository.findAll()).stream()
+        return ((List<Employee>) employeeRepository.findAll())
+                .stream()
                 .map(this::buildEmployeeDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 

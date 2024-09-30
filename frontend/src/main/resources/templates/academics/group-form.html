@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments :: head('Grupos')}"/>
+<body>
+<nav th:replace="~{fragments :: navbar('groups')}"/>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Nuevo Grupo</h1>
+
+    <form>
+        <div class="row mb-3">
+            <div class="col-6">
+                <label for="period" class="form-label">Periodo</label>
+                <select class="form-select" id="period" name="period" required>
+                    <option value="">Seleccionar periodo</option>
+                    <option th:each="period : ${periods}" th:value="${period.id}" th:text="${period.startYear}"
+                            th:if="${selectedPeriod != null}" th:selected="${period.id == selectedPeriod.id}"></option>
+                    <option th:each="period : ${periods}" th:value="${period.id}" th:text="${period.startYear}"
+                            th:unless="${selectedPeriod != null}"></option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label for="career" class="form-label">Carrera</label>
+                <select class="form-select" id="career" name="career" required>
+                    <option value="">Seleccionar carrera</option>
+                    <option th:each="career : ${careers}" th:value="${career.id}" th:text="${career.name}"
+                            th:if="${selectedCareer != null}" th:selected="${career.id == selectedCareer.id}"></option>
+                    <option th:each="career : ${careers}" th:value="${career.id}" th:text="${career.name}"
+                            th:unless="${selectedCareer != null}"></option>
+                </select>
+            </div>
+        </div>
+    </form>
+
+    <form th:if="${group != null}">
+        [[${students}]]
+        [[${subjects}]]
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-secondary" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </button>
+            <button type="submit" class="btn btn-custom">
+                <i class="fas fa-save"></i> Guardar Grupo
+            </button>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="~{fragments :: footer}"/>
+
+<script th:src="@{/js/group-form.js}"></script>
+</body>
+</html>

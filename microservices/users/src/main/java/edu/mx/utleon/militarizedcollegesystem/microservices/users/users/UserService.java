@@ -27,7 +27,10 @@ public class UserService {
     }
 
     public List<UserDto> getAllUsers() {
-        return ((List<User>) userRepository.findAll()).stream().map(this::buildUserDto).collect(Collectors.toList());
+        return ((List<User>) userRepository.findAll())
+                .stream()
+                .map(this::buildUserDto)
+                .toList();
     }
 
     public UserDto updateAccount(UserDto user) {

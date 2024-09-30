@@ -1,5 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.common.entities.academics;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,10 +22,12 @@ public class Subject {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, name = "teacher_id")
-    private Long teacherId;
+    @ManyToMany(mappedBy = "subjects")
+    @JsonIgnore
+    private Collection<Group> groups;
 
     @ManyToMany(mappedBy = "subjects")
-    private Collection<Group> groups;
+    @JsonIgnore
+    private Collection<Career> careers;
 
 }

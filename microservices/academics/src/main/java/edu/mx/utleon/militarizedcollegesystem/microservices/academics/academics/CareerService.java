@@ -17,4 +17,7 @@ public class CareerService {
         return(List<Career>) careerRepository.findAll();
     }
 
+    public Career getCareerById(Long id) {
+        return careerRepository.findById(id).orElse(null);
+    }
 }
