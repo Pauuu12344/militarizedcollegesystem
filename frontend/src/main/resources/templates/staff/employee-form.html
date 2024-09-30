@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments :: head('Empleados')}"/>
+<body>
+<nav th:replace="~{fragments :: navbar('employees')}"/>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Nuevo Empleado</h1>
+    <form th:object="${employee}" th:action="@{/employees/new}" method="post">
+        <div class="mb-3">
+            <label for="fullName" class="form-label">Nombre Completo</label>
+            <input th:field="*{fullName}" type="text" class="form-control" id="fullName" name="fullName" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input  th:field="*{email}" type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Telefono</label>
+            <input th:field="*{phone}"  type="tel" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="mb-3">
+            <label for="curp" class="form-label">Clave Única de Registro Poblacional</label>
+            <input  th:field="*{curp}" type="text" class="form-control" id="curp" name="curp" required>
+        </div>
+        <div class="mb-3">
+            <label for="contract" class="form-label">Contrato</label>
+            <select th:field="*{contract}" class="form-select" id="contract" name="contract" required>
+                <option value="" selected>Selecciona una opción...</option>
+                <option th:each="contract: ${contracts}" th:value="${contract.type}"  th:text="${contract.type}"></option>
+
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="area" class="form-label">Area</label>
+            <select th:field="*{area}"  class="form-select" id="area" name="area" required>
+                <option value="" selected>Selecciona una opción...</option>
+                <option th:each="area: ${areas}" th:value="${area.name}"  th:text="${area.name}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="roleId" class="form-label">Rol</label>
+            <select th:field="*{roleId}" class="form-select" id="roleId" name="roleId" required>
+                <option value="" selected>Selecciona una opción...</option>
+                <option th:each="role: ${roles}" th:value="${role.id}"  th:text="${role.name}" th:if="${role.name} != 'ESTUDIANTE'"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Agregar </button>
+    </form>
+</div>
+
+<footer th:replace="~{fragments :: footer}"/>
+</body>
+</html>

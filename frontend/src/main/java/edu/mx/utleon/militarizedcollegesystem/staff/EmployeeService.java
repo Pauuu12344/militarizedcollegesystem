@@ -1,6 +1,7 @@
 package edu.mx.utleon.militarizedcollegesystem.staff;
 
 import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeeDto;
+import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,10 @@ public class EmployeeService {
     public List<EmployeeDto> getAllEmployees() {
         String path = STAFF_URL + "employees";
         return restTemplate.getForObject(path, List.class);
+    }
+
+    public void createEmployee(EmployeeDto employee) {
+        String path = STAFF_URL + "employees";
+        restTemplate.postForObject(path, employee, EmployeeDto.class);
     }
 }

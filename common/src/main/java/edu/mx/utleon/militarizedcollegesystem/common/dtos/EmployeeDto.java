@@ -14,13 +14,15 @@ public class EmployeeDto {
     private String startDate;
     private String contract;
     private String area;
-    private Long personId;
-    private String fullName;
-    private Long phone;
-    private String curp;
     private Long userId;
     private String username;
     private String password;
     private String email;
     private boolean active;
+    private Long roleId;
+    private String role;
+    private Long personId;
+    private String fullName;
+    private Long phone;
+    private String curp;
 }
