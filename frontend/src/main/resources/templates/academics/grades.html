@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity6" lang="es">
+<head th:replace="~{fragments :: head('Calificaciones')}"/>
+<body>
+<nav th:replace="~{fragments :: navbar('grades')}"/>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Catálogo de Calificaciones</h1>
+
+    <div class="row mb-3" sec:authorize="hasAnyAuthority('PROFESOR', 'SERVICIOS_ESCOLARES')">
+        <div class="col-6">
+            <label for="period" class="form-label">Periodo</label>
+            <select class="form-select" id="period" name="period" required>
+                <option value="">Seleccionar periodo</option>
+                <option th:each="period : ${periods}" th:value="${period.id}" th:text="${period.startYear}"
+                        th:if="${selectedPeriod != null}" th:selected="${period.id == selectedPeriod.id}"></option>
+                <option th:each="period : ${periods}" th:value="${period.id}" th:text="${period.startYear}"
+                        th:unless="${selectedPeriod != null}"></option>
+            </select>
+        </div>
+        <div class="col-6">
+            <label for="career" class="form-label">Carrera</label>
+            <select class="form-select" id="career" name="career" required>
+                <option value="">Seleccionar carrera</option>
+                <option th:each="career : ${careers}" th:value="${career.id}" th:text="${career.name}"
+                        th:if="${selectedCareer != null}" th:selected="${career.id == selectedCareer.id}"></option>
+                <option th:each="career : ${careers}" th:value="${career.id}" th:text="${career.name}"
+                        th:unless="${selectedCareer != null}"></option>
+            </select>
+        </div>
+        <div th:unless="${groups == null}" class="col-12">
+            <label for="group" class="form-label">Grupo</label>
+            <select class="form-select" id="group" name="group" required>
+                <option value="">Seleccionar grupo</option>
+                <option th:each="group : ${groups}" th:value="${group.groupId}" th:text="${group.name}"
+                        th:if="${selectedGroup != null}"
+                        th:selected="${group.groupId == selectedGroup.groupId}"></option>
+                <option th:each="group : ${groups}" th:value="${group.groupId}" th:text="${group.name}"
+                        th:unless="${selectedGroup != null}"></option>
+            </select>
+        </div>
+        <div th:unless="${groupGrades == null}" class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Alumno</th>
+                    <th>Primer Parcial</th>
+                    <th>Segundo Parcial</th>
+                    <th>Tercer Parcial</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="grade : ${groupGrades}" th:data-grade-id="${grade.gradeId}" sec:authorize="hasAuthority('PROFESOR')">
+                    <td th:text="${grade.subject}"></td>
+                    <td th:text="${grade.fullName}"></td>
+                    <td>
+                        <input type="number" class="form-control" th:value="${grade.firstPartial}" name="firstPartial"
+                               min="0" max="100">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" th:value="${grade.secondPartial}" name="secondPartial"
+                               min="0" max="100">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" th:value="${grade.thirdPartial}" name="thirdPartial"
+                               min="0" max="100">
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-success"
+                                th:onclick="'saveGrade(' + ${grade.gradeId} + ')'">
+                            <i class="fa-solid fa-save"></i>
+                            Guardar
+                        </button>
+                    </td>
+                </tr>
+                <tr th:each="grade : ${groupGrades}" sec:authorize="hasAuthority('SERVICIOS_ESCOLARES')">
+                    <td th:text="${grade.subject}"></td>
+                    <td th:text="${grade.fullName}"></td>
+                    <td th:text="${grade.firstPartial}"></td>
+                    <td th:text="${grade.secondPartial}"></td>
+                    <td th:text="${grade.thirdPartial}"></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mb-3" sec:authorize="hasAuthority('ESTUDIANTE')">
+        <div th:unless="${studentGrades == null}" class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Primer Parcial</th>
+                    <th>Segundo Parcial</th>
+                    <th>Tercer Parcial</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="grade : ${studentGrades}">
+                    <td th:text="${grade.subject}"></td>
+                    <td th:text="${grade.firstPartial}"></td>
+                    <td th:text="${grade.secondPartial}"></td>
+                    <td th:text="${grade.thirdPartial}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments :: footer}"/>
+
+<script th:src="@{/js/grades.js}"></script>
+</body>
+</html>

@@ -19,12 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function addStudentToGroup(button) {
     const studentId = button.getAttribute('data-student-id');
     const studentName = button.getAttribute('data-student-name');
+    const studentEnrollment = button.getAttribute('data-student-enrollment');
     const groupStudentsTable = document.getElementById('group-students').getElementsByTagName('tbody')[0];
 
     console.log(studentName);
 
     const newRow = groupStudentsTable.insertRow();
-    newRow.innerHTML = `<td>${studentName}</td><td><button type="button" class="btn btn-sm btn-outline-danger" onclick="removeStudentFromGroup(this)" data-student-id="${studentId}">Eliminar</button></td>`;
+    newRow.innerHTML = `
+        <td>${studentId}</td>
+        <td>${studentName}</td>
+        <td>${studentEnrollment}</td>
+        <td>
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeStudentFromGroup(this)" data-student-id="${studentId}">
+                Eliminar
+            </button>
+        </td>`;
 
     button.disabled = true;
     updateStudentsInput();
@@ -53,7 +62,15 @@ function addSubjectToGroup(button) {
     const groupSubjectsTable = document.getElementById('group-subjects').getElementsByTagName('tbody')[0];
 
     const newRow = groupSubjectsTable.insertRow();
-    newRow.innerHTML = `<td>${subjectName}</td><td><button type="button" class="btn btn-sm btn-outline-danger" onclick="removeSubjectFromGroup(this)" data-subject-id="${subjectId}">Eliminar</button></td>`;
+    newRow.innerHTML = `
+        <td>${subjectId}</td>
+        <td>${subjectName}</td>
+        <td>
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeSubjectFromGroup(this)" data-subject-id="${subjectId}">
+                Eliminar
+            </button>
+        </td>
+    `;
 
     button.disabled = true;
     updateSubjectsInput();

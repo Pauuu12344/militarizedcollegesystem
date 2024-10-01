@@ -1,5 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.common.entities.academics;
 
+import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Employee;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,11 +27,15 @@ public class Grade {
     private float thirdPartial;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
     private Student student;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    @JoinColumn(name = "subject_id", referencedColumnName = "id", nullable = false)
     private Subject subject;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
+    private Group group;
 
 }

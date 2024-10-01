@@ -46,16 +46,21 @@
                     <table class="table table-responsive-sm " id="available-students">
                         <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Nombre</th>
+                            <th>Matrícula</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="student : ${students}">
+                            <td th:text="${student.studentId}"></td>
                             <td th:text="${student.fullName}"></td>
+                            <td th:text="${student.enrollment}"></td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-outline-success" onclick="addStudentToGroup(this)"
                                         th:data-student-id="${student.studentId}"
+                                        th:data-student-enrollment="${student.enrollment}"
                                         th:data-student-name="${student.fullName}">
                                     Agregar
                                 </button>
@@ -69,7 +74,9 @@
                     <table class="table table-responsive-sm " id="group-students">
                         <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Nombre</th>
+                            <th>Matrícula</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -86,12 +93,14 @@
                     <table class="table table-responsive-sm " id="available-subjects">
                         <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Nombre</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="subject : ${subjects}">
+                            <td th:text="${subject.subjectId}"></td>
                             <td th:text="${subject.name}"></td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-outline-success" onclick="addSubjectToGroup(this)"

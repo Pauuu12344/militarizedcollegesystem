@@ -29,6 +29,7 @@ public class GroupController {
     @GetMapping("/groups")
     public String viewGroups(Model model) {
         model.addAttribute("groups", groupService.getAllGroups());
+        model.addAttribute("careers", careerService.getAllCareers());
         return "academics/groups";
     }
 

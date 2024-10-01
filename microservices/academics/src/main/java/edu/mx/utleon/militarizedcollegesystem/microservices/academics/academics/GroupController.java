@@ -2,10 +2,7 @@ package edu.mx.utleon.militarizedcollegesystem.microservices.academics.academics
 
 import edu.mx.utleon.militarizedcollegesystem.common.dtos.GroupDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +13,16 @@ public class GroupController {
     private GroupService groupService;
 
     @GetMapping("/groups")
-    public List<GroupDto> getAllGroups() {
+    public List<GroupDto> getAllGroups(@RequestParam(required = false) Long periodId, @RequestParam(required = false) Long careerId) {
+        if (periodId != null && careerId != null) {
+            return groupService.getAllGroupsByPeriodIdAndCareerId(periodId, careerId);
+        }
         return groupService.getAllGroups();
+    }
+
+    @GetMapping("/group")
+    public GroupDto getGroup(@RequestParam(required = false) Long id) {
+        return groupService.getGroupById(id);
     }
 
     @PostMapping("/groups")

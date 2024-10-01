@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity6" lang="es">
 <head th:replace="~{fragments :: head('Grupos')}"/>
 <body>
 <nav th:replace="~{fragments :: navbar('groups')}"/>
@@ -30,9 +30,34 @@
         No hay grupos registrados.
     </div>
 
-    <a th:href="@{/groups/new}" class="btn btn-outline-success w-100">
+    <a th:href="@{/groups/new}" class="btn btn-outline-success w-100" sec:authorize="hasAuthority('SERVICIOS_ESCOLARES')">
         <i class="fas fa-plus"></i> Nuevo Grupo
     </a>
+</div>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Catálogo de Carreras</h1>
+
+    <div th:unless="${careers.isEmpty()}" class="table-responsive my-5">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="career : ${careers}">
+                <td th:text="${career.id}"></td>
+                <td th:text="${career.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${careers.isEmpty()}" class="alert alert-success text-center my-5" role="alert">
+        No hay carreras registradas.
+    </div>
 </div>
 
 <footer th:replace="~{fragments :: footer}"/>

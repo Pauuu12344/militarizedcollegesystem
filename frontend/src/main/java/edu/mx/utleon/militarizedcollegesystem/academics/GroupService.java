@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class GroupService {
 
-
     @Autowired
     private RestTemplate restTemplate;
 
@@ -28,4 +27,13 @@ public class GroupService {
         restTemplate.postForObject(path, group, GroupDto.class);
     }
 
+    public List<GroupDto> getAllGroupsByPeriodIdAndCareerId(Long periodId, Long careerId) {
+        String path = ACADEMICS_URL + "groups?periodId=" + periodId + "&careerId=" + careerId;
+        return restTemplate.getForObject(path, List.class);
+    }
+
+    public GroupDto getGroupById(Long id) {
+        String path = ACADEMICS_URL + "group?id=" + id;
+        return restTemplate.getForObject(path, GroupDto.class);
+    }
 }
