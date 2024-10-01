@@ -23,5 +23,9 @@ public class GroupService {
         return restTemplate.getForObject(path, List.class);
     }
 
+    public void createGroup(GroupDto group) {
+        String path = ACADEMICS_URL + "groups";
+        restTemplate.postForObject(path, group, GroupDto.class);
+    }
 
 }

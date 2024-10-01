@@ -22,7 +22,7 @@ public class Group {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "Group_Student",
             joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
@@ -30,7 +30,7 @@ public class Group {
     )
     private Collection<Student> students;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "Group_Subject",
             joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),

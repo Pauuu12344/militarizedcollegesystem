@@ -44,7 +44,7 @@ public class StudentService {
         Period period = periodRepository.findById(student.getPeriod().getId()).orElse(null);
         Person person = personRepository.findById(student.getPersonId()).orElse(null);
         return StudentDto.builder()
-                .id(student.getId())
+                .studentId(student.getId())
                 .enrollment(student.getEnrollment())
                 .careerId(career.getId())
                 .career(career.getName())

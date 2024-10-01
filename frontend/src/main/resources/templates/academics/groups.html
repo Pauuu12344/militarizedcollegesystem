@@ -18,15 +18,15 @@
             </thead>
             <tbody>
             <tr th:each="group : ${groups}">
-                <td th:text="${group.id}"></td>
+                <td th:text="${group.groupId}"></td>
                 <td th:text="${group.name}"></td>
-                <td th:text="${group.students.length}"></td>
+                <td th:text="${group.studentIds.size()}"></td>
             </tr>
             </tbody>
         </table>
     </div>
 
-    <div th:if="${groups.isEmpty()}" class="alert alert-success my-5" role="alert">
+    <div th:if="${groups.isEmpty()}" class="alert alert-success text-center my-5" role="alert">
         No hay grupos registrados.
     </div>
 

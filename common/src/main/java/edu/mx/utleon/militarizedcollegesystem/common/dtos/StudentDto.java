@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @ToString
 public class StudentDto {
-    private Long id;
+    private Long studentId;
     private String enrollment;
     private Long careerId;
     private String career;
