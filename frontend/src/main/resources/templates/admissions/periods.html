@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments :: head('Periodos')}"/>
+<body>
+<nav th:replace="~{fragments :: navbar('periods')}"/>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Catálogo de Periodos</h1>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Año de Inicio</th>
+                <th>Descripción</th>
+                <th>Estatus</th>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="period : ${periods}">
+                <td th:text="${period.startYear}"></td>
+                <td th:text="${period.description}"></td>
+
+                <td>
+                    <span th:if="${period.active}" class="badge bg-success">Abierto</span>
+                    <span th:if="${!period.active}" class="badge bg-danger">Inactivo</span>
+                </td>
+                <td th:text="${period.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer th:replace="~{fragments :: footer}"/>
+</body>
+</html>

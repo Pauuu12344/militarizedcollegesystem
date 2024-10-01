@@ -21,7 +21,10 @@
         </div>
         <div class="mb-3">
             <label for="curp" class="form-label">Clave Única de Registro Poblacional</label>
-            <input  th:field="*{curp}" type="text" class="form-control" id="curp" name="curp" required>
+            <input  th:field="*{curp}" type="text" class="form-control" id="curp" name="curp" required
+                    maxlength="18"
+                    pattern=".{18,}"
+                    title="El CURP debe tener exactamente 18 caracteres">
         </div>
         <div class="mb-3">
             <label for="contract" class="form-label">Contrato</label>
@@ -45,9 +48,17 @@
                 <option th:each="role: ${roles}" th:value="${role.id}"  th:text="${role.name}" th:if="${role.name} != 'ESTUDIANTE'"></option>
             </select>
         </div>
-        <button type="submit" class="btn btn-success">Agregar </button>
+        <div class="d-flex pt-3 gap-4 justify-content-center align-items-center text-center">
+            <a class="btn btn-outline-secondary w-100" th:href="@{/employees}">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+            <button type="submit" class="btn btn-custom w-100">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+        </div>
     </form>
 </div>
+
 
 <footer th:replace="~{fragments :: footer}"/>
 </body>

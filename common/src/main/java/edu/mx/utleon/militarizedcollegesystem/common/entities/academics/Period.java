@@ -25,4 +25,8 @@ public class Period {
     @Column(nullable = false)
     private boolean active;
 
+    @Column(nullable = false)
+    private String name;
+
+
 }

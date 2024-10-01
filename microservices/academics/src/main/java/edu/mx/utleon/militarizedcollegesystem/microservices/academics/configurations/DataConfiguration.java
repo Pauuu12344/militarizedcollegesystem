@@ -51,9 +51,11 @@ public class DataConfiguration {
     public void createData(ApplicationReadyEvent event) {
         Period period2024 = createPeriod(Period.builder()
                 .startYear(2024)
-                .description("Perido 2024")
+                .description("16 semanas de clases, evaluaciones y actividades académicas")
                 .active(true)
+                .name("Periodo Sep-Dic 2024")  // Asegúrate de incluir el valor de nombre
                 .build());
+
 
         Role roleEstudiante = createRole(Roles.ESTUDIANTE.name());
 

@@ -17,7 +17,9 @@
         </div>
         <div class="mb-3">
             <label for="curp" class="form-label">Clave Única de Registro Poblacional (CURP)</label>
-            <input type="text" class="form-control" id="curp" name="curp" required th:field="*{curp}">
+            <input type="text" class="form-control" id="curp" name="curp" required th:field="*{curp}"  maxlength="18"
+                   pattern=".{18,}"
+                   title="El CURP debe tener exactamente 18 caracteres">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
