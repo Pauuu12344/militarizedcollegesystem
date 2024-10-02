@@ -11,9 +11,12 @@ public class PersonService {
 
     @Value("${microservices.url.users}")
     private String USERS_URL;
+
     public boolean checkCurp(String curp){
         String path= USERS_URL + "persons?curp=" + curp;
-        return Boolean.TRUE.equals(restTemplate.getForObject(path, boolean.class));
+        boolean result = Boolean.TRUE.equals(restTemplate.getForObject(path, boolean.class));
+        System.out.println(result);
+        return result;
     }
 
 }

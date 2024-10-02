@@ -6,7 +6,7 @@
 
 <div class="container mt-4">
     <h1 class="mb-4">Nuevo Empleado</h1>
-    <form th:object="${employee}" th:action="@{/employees/new}" method="post">
+    <form th:object="${employee}" th:action="@{/employees/new}" method="post" onsubmit="return checkCurp(this)">
         <div class="mb-3">
             <label for="fullName" class="form-label">Nombre Completo</label>
             <input th:field="*{fullName}" type="text" class="form-control" id="fullName" name="fullName" required>
@@ -25,6 +25,7 @@
                     maxlength="18"
                     pattern=".{18,}"
                     title="El CURP debe tener exactamente 18 caracteres">
+            <small id="curpError" class="text-danger"></small>
         </div>
         <div class="mb-3">
             <label for="contract" class="form-label">Contrato</label>
@@ -61,5 +62,7 @@
 
 
 <footer th:replace="~{fragments :: footer}"/>
+
+<script th:src="@{/js/curp.js}"></script>
 </body>
 </html>

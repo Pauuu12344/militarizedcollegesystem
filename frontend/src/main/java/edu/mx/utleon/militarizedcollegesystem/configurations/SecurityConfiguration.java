@@ -31,6 +31,10 @@ public class SecurityConfiguration {
                     .permitAll();
 
             authorizationManagerRequestMatcherRegistry
+                    .requestMatchers("/validations/**")
+                    .permitAll();
+
+            authorizationManagerRequestMatcherRegistry
                     .requestMatchers("/users/**")
                     .hasAuthority(Roles.TECNOLOGIAS_DE_LA_INFORMACION.name())
 
