@@ -130,6 +130,6 @@ public class ApplicationService {
             sum += grade.getSecondPartial();
             sum += grade.getThirdPartial();
         }
-        return Float.parseFloat(new DecimalFormat("0.00").format(sum / grades.size()));
+        return Float.parseFloat(new DecimalFormat("0.00").format(sum / (grades.size()*3)));
     }
 }
