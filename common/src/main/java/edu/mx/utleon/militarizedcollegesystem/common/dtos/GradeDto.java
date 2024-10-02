@@ -1,8 +1,9 @@
 package edu.mx.utleon.militarizedcollegesystem.common.dtos;
 
+import jakarta.persistence.Transient;
 import lombok.*;
 
-import java.util.Collection;
+import java.text.DecimalFormat;
 
 @Getter
 @Setter
@@ -29,4 +30,9 @@ public class GradeDto {
     private String fullName;
     private Long phone;
     private String curp;
+
+    @Transient
+    public float getAverage() {
+        return Float.parseFloat(new DecimalFormat("0.00").format((firstPartial + secondPartial + thirdPartial) / 3));
+    }
 }

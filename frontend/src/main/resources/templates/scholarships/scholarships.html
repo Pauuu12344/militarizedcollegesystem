@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity6" lang="en">
+<head th:replace="~{fragments :: head('Becas')}"/>
+<body>
+<nav th:replace="~{fragments :: navbar('scholarships')}"/>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Catálogo de Becas</h1>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Estatus</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="scholarship : ${scholarships}">
+                <td th:text="${scholarship.id}"></td>
+                <td th:text="${scholarship.name}"></td>
+                <td th:text="${scholarship.description}"></td>
+                <td>
+                    <span th:if="${scholarship.active}" class="badge bg-success">Activa</span>
+                    <span th:unless="${scholarship.active}" class="badge bg-danger">Inactiva</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container mt-4" sec:authorize="hasAuthority('SERVICIOS_ESCOLARES')">
+    <h1 class="mb-4">Solicitudes de Beca</h1>
+
+    <div class="table-responsive" th:unless="${allApplications.isEmpty()}">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Estudiante</th>
+                <th>Matrícula</th>
+                <th>Beca</th>
+                <th>Promedio</th>
+                <th>Estatus</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="allApplication : ${allApplications}">
+                <td th:text="${allApplication.applicationId}"></td>
+                <td th:text="${allApplication.fullName}"></td>
+                <td th:text="${allApplication.enrollment}"></td>
+                <td th:text="${allApplication.scholarship}"></td>
+                <td th:text="${allApplication.averageGrade}"></td>
+                <td>
+                    <span th:if="${allApplication.status == 'PENDIENTE'}" class="badge bg-warning">Pendiente</span>
+                    <span th:if="${allApplication.status == 'ACEPTADA'}" class="badge bg-success">Aceptada</span>
+                    <span th:if="${allApplication.status == 'RECHAZADA'}" class="badge bg-danger">Rechazada</span>
+                </td>
+                <td class="row">
+                    <a th:if="${allApplication.status == 'PENDIENTE'}" th:href="@{'/scholarships/accept/' + ${allApplication.applicationId}}" class="text-success text-decoration-none">
+                        <i class="fas fa-check"></i> Aceptar
+                    </a>
+                    <a th:if="${allApplication.status == 'PENDIENTE'}" th:href="@{'/scholarships/reject/' + ${allApplication.applicationId}}" class="text-danger text-decoration-none">
+                        <i class="fas fa-times"></i> Rechazar
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${allApplications.isEmpty()}" class="alert alert-success mt-3" role="alert">
+        No hay solicitudes de beca registradas.
+    </div>
+</div>
+
+<div class="container mt-4" sec:authorize="hasAuthority('ESTUDIANTE')">
+    <h1 class="mb-4">Mis Aplicaciones</h1>
+
+    <form th:object="${studentApplication}" th:action="@{/scholarships/apply}" method="post">
+        <input type="hidden" th:field="*{studentId}"/>
+        <div class="form-group row">
+            <div class="col-6">
+                <select class="form-select" th:field="*{scholarshipId}">
+                    <option value="">Selecciona una beca</option>
+                    <option th:each="scholarship : ${scholarships}" th:value="${scholarship.id}"
+                            th:text="${scholarship.name}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-outline-success col-6">
+                <i class="fas fa-check"></i>
+                Aplicar
+            </button>
+        </div>
+    </form>
+
+    <div class="table-responsive" th:unless="${studentApplications.isEmpty()}">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Feedback</th>
+                <th>Estatus</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="studentApplication : ${studentApplications}">
+                <td th:text="${studentApplication.applicationId}"></td>
+                <td th:text="${studentApplication.scholarship}"></td>
+                <td th:text="${studentApplication.feedback}"></td>
+                <td>
+                    <span th:if="${studentApplication.status == 'PENDIENTE'}" class="badge bg-warning">Pendiente</span>
+                    <span th:if="${studentApplication.status == 'ACEPTADA'}" class="badge bg-success">Aceptada</span>
+                    <span th:if="${studentApplication.status == 'RECHAZADA'}" class="badge bg-danger">Rechazada</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${studentApplications.isEmpty()}" class="alert alert-success mt-3" role="alert">
+        No tienes aplicaciones registradas.
+    </div>
+</div>
+
+<footer th:replace="~{fragments :: footer}"/>
+</body>
+</html>

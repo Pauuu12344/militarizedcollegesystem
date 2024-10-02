@@ -97,6 +97,7 @@
                     <th>Primer Parcial</th>
                     <th>Segundo Parcial</th>
                     <th>Tercer Parcial</th>
+                    <th>Promedio</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -105,10 +106,13 @@
                     <td th:text="${grade.firstPartial}"></td>
                     <td th:text="${grade.secondPartial}"></td>
                     <td th:text="${grade.thirdPartial}"></td>
+                    <td th:text="${grade.average}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
+        <p th:unless="${averageGrade == null}" th:text="${'Promedio total ' + averageGrade}" class="text-end m-5"></p>
+        <p th:if="${studentGrades == null}">No hay calificaciones disponibles</p>
     </div>
 </div>
 

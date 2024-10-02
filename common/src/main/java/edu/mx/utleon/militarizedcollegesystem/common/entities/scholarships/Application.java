@@ -17,11 +17,11 @@ public class Application {
     private Long id;
 
     @Column(nullable = false)
-    private boolean approved;
+    private String status;
 
-    @Column(nullable = false)
     private String feedback;
 
+    @Column(nullable = false, name = "student_id")
     private Long studentId;
 
     @ManyToOne(fetch = FetchType.LAZY)

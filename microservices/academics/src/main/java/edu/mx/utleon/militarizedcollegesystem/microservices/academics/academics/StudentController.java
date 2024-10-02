@@ -22,4 +22,12 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
+    @GetMapping("/student")
+    public StudentDto getStudent(@RequestParam(required = false) Long id, @RequestParam(required = false) Long personId) {
+        if (personId != null) {
+            return studentService.getStudentByPersonId(personId);
+        }
+        return studentService.getStudentById(id);
+    }
+
 }

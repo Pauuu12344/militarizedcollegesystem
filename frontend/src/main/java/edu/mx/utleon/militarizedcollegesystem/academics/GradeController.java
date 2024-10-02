@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class GradeController {
 
@@ -41,7 +43,9 @@ public class GradeController {
         UserDto user = userService.getByUsername(userDetails.getUsername());
 
         if (user.getRole().equals(Roles.ESTUDIANTE.name())) {
-            model.addAttribute("studentGrades", gradeService.getGradesByStudentPersonId(user.getPersonId()));
+            List<GradeDto> studentGrades = gradeService.getGradesByStudentPersonId(user.getPersonId());
+            model.addAttribute("studentGrades", studentGrades);
+            model.addAttribute("averageGrade", gradeService.getAverageGrade(studentGrades));
         }
 
         if (periodId != null && careerId != null) {

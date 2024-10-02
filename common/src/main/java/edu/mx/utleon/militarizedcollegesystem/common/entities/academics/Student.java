@@ -21,11 +21,11 @@ public class Student {
     @Column(nullable = false)
     private String enrollment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "career_id", nullable = false)
     private Career career;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "period_id", nullable = false)
     private Period period;
 

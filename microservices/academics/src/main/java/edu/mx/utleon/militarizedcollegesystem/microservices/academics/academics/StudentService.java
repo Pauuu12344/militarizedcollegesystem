@@ -39,6 +39,15 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
+
+    public StudentDto getStudentById(Long id) {
+        return buildStudentDto(studentRepository.findById(id).orElse(null));
+    }
+
+    public StudentDto getStudentByPersonId(Long personId) {
+        return buildStudentDto(studentRepository.findByPersonId(personId).orElse(null));
+    }
+
     public StudentDto buildStudentDto(Student student) {
         Career career = careerRepository.findById(student.getCareer().getId()).orElse(null);
         Period period = periodRepository.findById(student.getPeriod().getId()).orElse(null);

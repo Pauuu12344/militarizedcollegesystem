@@ -22,4 +22,8 @@ public class StudentService {
         return restTemplate.getForObject(path, List.class);
     }
 
+    public StudentDto getStudentByPersonId(Long personId) {
+        String path = ACADEMICS_URL + "student?personId=" + personId;
+        return restTemplate.getForObject(path, StudentDto.class);
+    }
 }
