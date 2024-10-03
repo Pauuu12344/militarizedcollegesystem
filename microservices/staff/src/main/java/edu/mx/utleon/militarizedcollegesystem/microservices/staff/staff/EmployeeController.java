@@ -25,5 +25,17 @@ public class EmployeeController {
 
     @PostMapping("/employees")
     public EmployeeDto createEmployee(@RequestBody EmployeeDto employee) {return employeeService.createEmployee(employee);}
+    @GetMapping("/employees/{id}")
+    public EmployeeDto getEmployeeById(@PathVariable Long id) {
+        return employeeService.getEmployeeById(id);
+    }
+    @PutMapping("/{employeeId}")
+    public EmployeeDto updateEmployee(@PathVariable Long employeeId, @RequestBody EmployeeDto employee) {
+        if (employee.getPassword() == null || employee.getPassword().isEmpty()) {
+            employee.setPassword(null);
+        }
+        return employeeService.updateEmployee(employeeId, employee);
+    }
+
 
 }

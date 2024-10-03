@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.LinkedHashMap;
@@ -41,5 +43,21 @@ public class EmployeeController {
         employeeService.createEmployee(employee);
         return "redirect:/employees";
     }
-
+    @GetMapping("/employees/edit/{id}")
+    public String viewEditEmployee(@PathVariable Long id, Model model) {
+        EmployeeDto employee = employeeService.getEmployeeById(id);
+        if (employee == null) {
+            return "redirect:/employees";
+        }
+        model.addAttribute("employee", employee);
+        model.addAttribute("contracts", contractService.getAllContracts());
+        model.addAttribute("areas", areaService.getAllAreas());
+        return "staff/employee-form-edit";
+    }
+    @PostMapping("/employees/edit/{id}")
+    public String updateEmployee(@PathVariable Long id, @ModelAttribute EmployeeDto employee) {
+        employeeService.updateEmployee(id, employee);
+        return "redirect:/employees";
+    }
 }
+

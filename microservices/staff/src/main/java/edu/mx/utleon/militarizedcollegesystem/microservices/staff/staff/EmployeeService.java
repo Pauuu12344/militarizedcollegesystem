@@ -113,6 +113,48 @@ public class EmployeeService {
         return buildEmployeeDto(employee);
     }
 
+    @Transactional
+    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto employeeDto) {
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(() -> new RuntimeException("Employee not found"));
+        Person person = personRepository.findById(employee.getPersonId()).orElseThrow(() -> new RuntimeException("Person not found"));
+        person.setFullName(employeeDto.getFullName());
+        person.setPhone(employeeDto.getPhone());
+        person.setCurp(employeeDto.getCurp());
+        personRepository.save(person);
+        Contract contract = contractRepository.findByType(employeeDto.getContract()).orElse(null);
+        if (contract != null) {
+            employee.setContract(contract);
+        }
+        Area area = areaRepository.findByName(employeeDto.getArea()).orElse(null);
+        if (area != null) {
+            employee.setArea(area);
+        }
+        employeeRepository.save(employee);
+        User user = userRepository.findByPersonId(employee.getPersonId()).orElseThrow(() -> new RuntimeException("User not found"));
+        if (employeeDto.getEmail() != null && !employeeDto.getEmail().isEmpty()) {
+            user.setEmail(employeeDto.getEmail());
+        }
+        if (employeeDto.getUsername() != null && !employeeDto.getUsername().isEmpty()) {
+            user.setUsername(employeeDto.getUsername());
+        }
+        if (employeeDto.getPassword() != null && !employeeDto.getPassword().isEmpty()) {
+            user.setPassword(employeeDto.getPassword());
+        }
+        Role role = roleRepository.findByName(employeeDto.getRole()).orElse(null);
+        if (role != null) {
+            user.setRole(role);
+        }
+        userRepository.save(user);
+
+        return buildEmployeeDto(employee);
+    }
+
+    public EmployeeDto getEmployeeById(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElse(null);
+        return buildEmployeeDto(employee);
+    }
+
     private EmployeeDto buildEmployeeDto(Employee employee) {
         User user = userRepository.findByPersonId(employee.getPersonId()).orElse(null);
         return EmployeeDto.builder()

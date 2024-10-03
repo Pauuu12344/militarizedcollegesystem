@@ -24,6 +24,7 @@
                 <th>Fecha de ingreso</th>
                 <th>Estatus</th>
                 <th>Área</th>
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -42,6 +43,11 @@
                     <span th:if="${!employee.active}" class="badge bg-danger">Inactivo</span>
                 </td>
                 <td th:text="${employee.area}"></td>
+                <td>
+                    <a th:href="@{/employees/edit/{id}(id=${employee.employeeId})}" class="btn btn-primary">
+                        Editar
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
