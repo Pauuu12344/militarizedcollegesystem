@@ -14,6 +14,8 @@
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Estudiantes</th>
+                <th>Nombre del Profesor</th>
+                <th>Número del Profesor</th>
             </tr>
             </thead>
             <tbody>
@@ -21,6 +23,8 @@
                 <td th:text="${group.groupId}"></td>
                 <td th:text="${group.name}"></td>
                 <td th:text="${group.studentIds.size()}"></td>
+                <td th:text="${group.teacher}"></td>
+                <td th:text="${group.teacherNumber}"></td>
             </tr>
             </tbody>
         </table>

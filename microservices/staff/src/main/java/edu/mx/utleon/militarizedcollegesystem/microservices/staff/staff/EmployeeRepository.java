@@ -14,4 +14,5 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     Optional<Employee> findByPersonId(Long personId);
 
+    Iterable<Employee> findAllByAreaName(String areaName);
 }

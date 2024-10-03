@@ -13,6 +13,9 @@ import java.util.Collection;
 public class GroupDto {
     private Long groupId;
     private String name;
+    private Long teacherId;
+    private String teacherNumber;
+    private String teacher;
     private Collection<Long> studentIds;
     private Collection<Long> subjectIds;
     private Collection<StudentDto> students;

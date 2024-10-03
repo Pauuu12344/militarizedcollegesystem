@@ -1,6 +1,8 @@
 package edu.mx.utleon.militarizedcollegesystem.academics;
 
 import edu.mx.utleon.militarizedcollegesystem.common.dtos.GroupDto;
+import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Areas;
+import edu.mx.utleon.militarizedcollegesystem.staff.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,8 @@ public class GroupController {
 
     @Autowired
     private SubjectService subjectService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping("/groups")
     public String viewGroups(Model model) {
@@ -44,6 +48,7 @@ public class GroupController {
             model.addAttribute("selectedCareer", careerService.getCareerById(careerId));
             model.addAttribute("students", studentService.getAllStudentsByPeriodIdAndCareerId(periodId, careerId));
             model.addAttribute("subjects", subjectService.getAllSubjectsByCareerId(careerId));
+            model.addAttribute("teachers", employeeService.getAllEmployeesByArea(Areas.PROFESORES.name()));
             model.addAttribute("group", new GroupDto());
         }
 

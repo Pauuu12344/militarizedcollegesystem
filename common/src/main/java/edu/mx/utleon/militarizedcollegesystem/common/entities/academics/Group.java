@@ -22,6 +22,9 @@ public class Group {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false, name = "teacher_id")
+    private Long teacherId;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "Group_Student",

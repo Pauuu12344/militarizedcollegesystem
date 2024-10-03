@@ -56,6 +56,13 @@ public class EmployeeService {
     }
 
 
+    public List<EmployeeDto> getEmployeesByArea(String area) {
+        return ((List<Employee>) employeeRepository.findAllByAreaName(area))
+                .stream()
+                .map(this::buildEmployeeDto)
+                .toList();
+    }
+
     @Transactional
     public EmployeeDto createEmployee(EmployeeDto employeeDto){
         Person person = personRepository.save(
@@ -74,7 +81,7 @@ public class EmployeeService {
                         .area(area)
                         .personId(person.getId())
                         .build()
-                
+
         );
 
         Role role = null;
@@ -106,8 +113,6 @@ public class EmployeeService {
         return buildEmployeeDto(employee);
     }
 
-
-
     private EmployeeDto buildEmployeeDto(Employee employee) {
         User user = userRepository.findByPersonId(employee.getPersonId()).orElse(null);
         return EmployeeDto.builder()
@@ -128,7 +133,6 @@ public class EmployeeService {
                 .phone(user.getPerson().getPhone())
                 .curp(user.getPerson().getCurp())
                 .build();
-        
-    }
 
+    }
 }

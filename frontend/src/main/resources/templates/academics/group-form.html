@@ -32,10 +32,21 @@
 
     <form th:if="${group != null}" th:object="${group}" th:action="@{/groups/new}" method="post" onsubmit="return validateForm()">
         <input type="hidden" name="studentIds" id="students-input" th:field="*{studentIds}">
-        <input type="hidden" name="subjectIds" id="subjects-input" th:field="*{subjectIds}"> <div class="row mb-3">
+        <input type="hidden" name="subjectIds" id="subjects-input" th:field="*{subjectIds}">
+        <div class="row mb-3">
             <div class="col-12 mb-3">
                 <label for="name" class="form-label">Nombre del Grupo</label>
                 <input type="text" class="form-control" id="name" name="name" required th:field="*{name}">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12 mb-3">
+                <label for="teacher" class="form-label">Profesor</label>
+                <select type="text" class="form-control" id="teacher" name="teacher" required th:field="*{teacherId}">
+                    <option value="">Seleccionar profesor</option>
+                    <option th:each="teacher : ${teachers}" th:value="${teacher.employeeId}" th:text="${teacher.fullName}"></option>
+                </select>
             </div>
         </div>
 
