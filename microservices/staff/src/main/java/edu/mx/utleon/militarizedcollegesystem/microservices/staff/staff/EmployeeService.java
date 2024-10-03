@@ -76,7 +76,23 @@ public class EmployeeService {
                         .build()
                 
         );
-       Role role = roleRepository.findById(employeeDto.getRoleId()).orElse(null);
+
+        Role role = null;
+        switch (employeeDto.getArea()) {
+            case "PROFESORES":
+                role = roleRepository.findByName(Roles.PROFESOR.name()).orElse(null);
+                break;
+            case "SERVICIOS_ESCOLARES":
+                role = roleRepository.findByName(Roles.SERVICIOS_ESCOLARES.name()).orElse(null);
+                break;
+            case "TECNOLOGIAS_DE_LA_INFORMACION":
+                role = roleRepository.findByName(Roles.TECNOLOGIAS_DE_LA_INFORMACION.name()).orElse(null);
+                break;
+            case "RECUSOS_HUMANOS":
+                role = roleRepository.findByName(Roles.RECURSOS_HUMANOS.name()).orElse(null);
+                break;
+        }
+
        User user = userRepository.save(
                User.builder()
                        .person(person)

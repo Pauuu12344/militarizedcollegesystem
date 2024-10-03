@@ -14,9 +14,7 @@ public class PersonService {
 
     public boolean checkCurp(String curp){
         String path= USERS_URL + "persons?curp=" + curp;
-        boolean result = Boolean.TRUE.equals(restTemplate.getForObject(path, boolean.class));
-        System.out.println(result);
-        return result;
+        return Boolean.TRUE.equals(restTemplate.getForObject(path, boolean.class));
     }
 
 }

@@ -42,13 +42,6 @@
                 <option th:each="area: ${areas}" th:value="${area.name}"  th:text="${area.name}"></option>
             </select>
         </div>
-        <div class="mb-3">
-            <label for="roleId" class="form-label">Rol</label>
-            <select th:field="*{roleId}" class="form-select" id="roleId" name="roleId" required>
-                <option value="" selected>Selecciona una opción...</option>
-                <option th:each="role: ${roles}" th:value="${role.id}"  th:text="${role.name}" th:if="${role.name} != 'ESTUDIANTE'"></option>
-            </select>
-        </div>
         <div class="d-flex pt-3 gap-4 justify-content-center align-items-center text-center">
             <a class="btn btn-outline-secondary w-100" th:href="@{/employees}">
                 <i class="fas fa-arrow-left"></i> Volver

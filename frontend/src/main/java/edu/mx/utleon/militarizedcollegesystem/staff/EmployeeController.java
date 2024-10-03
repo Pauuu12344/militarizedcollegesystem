@@ -19,8 +19,6 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
     @Autowired
-    private RoleService roleService;
-    @Autowired
     private AreaService areaService;
     @Autowired
     private ContractService contractService;
@@ -35,7 +33,6 @@ public class EmployeeController {
         model.addAttribute("employee", new EmployeeDto());
         model.addAttribute("contracts", contractService.getAllContracts());
         model.addAttribute("areas", areaService.getAllAreas());
-        model.addAttribute("roles", roleService.getAllRoles());
         return "staff/employee-form";
     }
 
