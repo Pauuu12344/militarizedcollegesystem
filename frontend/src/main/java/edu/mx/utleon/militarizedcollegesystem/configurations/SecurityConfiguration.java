@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                     .permitAll();
 
             authorizationManagerRequestMatcherRegistry
-                    .requestMatchers("/validations/**")
+                    .requestMatchers("/validate")
                     .permitAll();
 
             authorizationManagerRequestMatcherRegistry
@@ -91,6 +91,11 @@ public class SecurityConfiguration {
                     .usernameParameter("username")
                     .permitAll();
         });
+
+        http.csrf(csrf -> csrf
+                .ignoringRequestMatchers("/validate") // Disable CSRF for /validate
+        );
+
         http.rememberMe(httpSecurityRememberMeConfigurer -> {
             httpSecurityRememberMeConfigurer
                     .key("AbcdEfghIjklmNopQrsTuvXyz_0123456789");

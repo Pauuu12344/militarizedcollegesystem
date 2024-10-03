@@ -6,7 +6,7 @@
 
 <div class="container mt-4">
     <h1 class="mb-4">Nuevo Empleado</h1>
-    <form th:object="${employee}" th:action="@{/employees/new}" method="post" onsubmit="return checkCurp(this)">
+    <form th:object="${employee}" th:action="@{/employees/new}" method="post" onsubmit="return validate(this)">
         <div class="mb-3">
             <label for="fullName" class="form-label">Nombre Completo</label>
             <input th:field="*{fullName}" type="text" class="form-control" id="fullName" name="fullName" required>
@@ -14,6 +14,7 @@
         <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
             <input  th:field="*{email}" type="email" class="form-control" id="email" name="email" required>
+            <small id="emailError" class="text-danger"></small>
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Telefono</label>
@@ -56,6 +57,6 @@
 
 <footer th:replace="~{fragments :: footer}"/>
 
-<script th:src="@{/js/curp.js}"></script>
+<script th:src="@{/js/validator.js}"></script>
 </body>
 </html>

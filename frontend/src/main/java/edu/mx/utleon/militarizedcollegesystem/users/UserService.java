@@ -37,4 +37,10 @@ public class UserService {
         String path = USERS_URL + "account";
         return restTemplate.postForObject(path, user, UserDto.class);
     }
+
+    public boolean checkEmail(String email) {
+        System.out.println(email);
+        String path = USERS_URL + "validate?email=" + email;
+        return Boolean.TRUE.equals(restTemplate.postForObject(path, null, boolean.class));
+    }
 }

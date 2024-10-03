@@ -46,6 +46,10 @@ public class UserService {
         return buildUserDto(userRepository.save(savedUser));
     }
 
+    public boolean checkEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
     private UserDto buildUserDto(User user) {
         return UserDto.builder()
                 .userId(user.getId())
@@ -61,5 +65,4 @@ public class UserService {
                 .curp(user.getPerson().getCurp())
                 .build();
     }
-
 }
