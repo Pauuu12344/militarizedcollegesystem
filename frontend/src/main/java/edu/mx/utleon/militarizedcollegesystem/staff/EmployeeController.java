@@ -1,9 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.staff;
 
 import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeeDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Role;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.users.Roles;
-import edu.mx.utleon.militarizedcollegesystem.users.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.LinkedHashMap;
-import java.util.List;
 
 @Controller
 public class EmployeeController {
@@ -30,6 +24,7 @@ public class EmployeeController {
         model.addAttribute("employees", employeeService.getAllEmployees());
         return "staff/employees";
     }
+
     @GetMapping("/employees/new")
     public String viewNewEmployee(Model model) {
         model.addAttribute("employee", new EmployeeDto());
@@ -38,26 +33,19 @@ public class EmployeeController {
         return "staff/employee-form";
     }
 
-    @PostMapping("/employees/new")
+    @PostMapping("/employees/save")
     public String createEmployee(EmployeeDto employee) {
-        employeeService.createEmployee(employee);
+        employeeService.saveEmployee(employee);
         return "redirect:/employees";
     }
-    @GetMapping("/employees/edit/{id}")
+
+    @GetMapping("/employees/{id}")
     public String viewEditEmployee(@PathVariable Long id, Model model) {
-        EmployeeDto employee = employeeService.getEmployeeById(id);
-        if (employee == null) {
-            return "redirect:/employees";
-        }
-        model.addAttribute("employee", employee);
+        model.addAttribute("employee", employeeService.getEmployeeById(id));
         model.addAttribute("contracts", contractService.getAllContracts());
         model.addAttribute("areas", areaService.getAllAreas());
-        return "staff/employee-form-edit";
+        return "staff/employee-form";
     }
-    @PostMapping("/employees/edit/{id}")
-    public String updateEmployee(@PathVariable Long id, @ModelAttribute EmployeeDto employee) {
-        employeeService.updateEmployee(id, employee);
-        return "redirect:/employees";
-    }
+
 }
 

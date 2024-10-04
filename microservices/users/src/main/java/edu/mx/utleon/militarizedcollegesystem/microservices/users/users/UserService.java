@@ -46,7 +46,11 @@ public class UserService {
         return buildUserDto(userRepository.save(savedUser));
     }
 
-    public boolean checkEmail(String email) {
+    public boolean checkEmail(Long id, String email) {
+        if (id != null) {
+            User user = userRepository.findById(id).orElse(null);
+            if (user.getEmail().equals(email)) return false;
+        }
         return userRepository.findByEmail(email).isPresent();
     }
 

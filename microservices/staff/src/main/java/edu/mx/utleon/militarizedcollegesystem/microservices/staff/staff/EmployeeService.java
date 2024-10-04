@@ -1,13 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.microservices.staff.staff;
 
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.ApplicantDto;
 import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeeDto;
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.UserDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Career;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Period;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.academics.Student;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.admissions.Applicant;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.admissions.Status;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Area;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Contract;
 import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Employee;
@@ -24,11 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -49,43 +39,67 @@ public class EmployeeService {
     private AreaRepository areaRepository;
 
     public List<EmployeeDto> getAllEmployees() {
-        return ((List<Employee>) employeeRepository.findAll())
-                .stream()
-                .map(this::buildEmployeeDto)
-                .toList();
+        return ((List<Employee>) employeeRepository.findAll()).stream().map(this::buildEmployeeDto).toList();
     }
 
 
     public List<EmployeeDto> getEmployeesByArea(String area) {
-        return ((List<Employee>) employeeRepository.findAllByAreaName(area))
-                .stream()
-                .map(this::buildEmployeeDto)
-                .toList();
+        return ((List<Employee>) employeeRepository.findAllByAreaName(area)).stream().map(this::buildEmployeeDto).toList();
     }
 
     @Transactional
-    public EmployeeDto createEmployee(EmployeeDto employeeDto){
-        Person person = personRepository.save(
-                Person.builder()
-                        .fullName(employeeDto.getFullName())
-                        .phone(employeeDto.getPhone())
-                        .curp(employeeDto.getCurp())
-                        .build()
-        );
-        Contract contract = contractRepository.findByType(employeeDto.getContract()).orElse(null);
-        Area area = areaRepository.findByName(employeeDto.getArea()).orElse(null);
-        Employee employee= employeeRepository.save(
-                Employee.builder()
-                        .contract(contract)
-                        .startDate(Instant.now())
-                        .area(area)
-                        .personId(person.getId())
-                        .build()
+    public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
+        if (isEditing(employeeDto)) {
+            Employee employee = employeeRepository.findById(employeeDto.getEmployeeId()).orElse(null);
+            Contract contract = contractRepository.findByType(employeeDto.getContract()).orElse(null);
+            Area area = areaRepository.findByName(employeeDto.getArea()).orElse(null);
+            employee.setContract(contract);
+            employee.setArea(area);
 
-        );
+            Person person = personRepository.findById(employeeDto.getPersonId()).orElse(null);
+            person.setFullName(employeeDto.getFullName());
+            person.setPhone(employeeDto.getPhone());
+            person.setCurp(employeeDto.getCurp());
 
+            Role role = getRoleByArea(area);
+            User user = userRepository.findByPersonId(employee.getPersonId()).orElse(null);
+            user.setEmail(employeeDto.getEmail());
+            user.setRole(role);
+
+            employeeRepository.save(employee);
+            personRepository.save(person);
+            userRepository.save(user);
+
+            return buildEmployeeDto(employee);
+        } else {
+            Person person = Person.builder().fullName(employeeDto.getFullName()).phone(employeeDto.getPhone()).curp(employeeDto.getCurp()).build();
+            person = personRepository.save(person);
+
+            Contract contract = contractRepository.findByType(employeeDto.getContract()).orElse(null);
+            Area area = areaRepository.findByName(employeeDto.getArea()).orElse(null);
+            Role role = getRoleByArea(area);
+
+            Employee employee = Employee.builder().contract(contract).startDate(Instant.now()).area(area).personId(person.getId()).build();
+            employee = employeeRepository.save(employee);
+
+            userRepository.save(User.builder().person(person).role(role).username(employee.getNumber()).password(employee.getNumber()).email(employeeDto.getEmail()).active(true).build());
+
+            return buildEmployeeDto(employee);
+        }
+    }
+
+    public EmployeeDto getEmployeeById(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId).orElse(null);
+        return buildEmployeeDto(employee);
+    }
+
+    public boolean isEditing(EmployeeDto employeeDto) {
+        return employeeDto.getEmployeeId() != null;
+    }
+
+    public Role getRoleByArea(Area area) {
         Role role = null;
-        switch (employeeDto.getArea()) {
+        switch (area.getName()) {
             case "PROFESORES":
                 role = roleRepository.findByName(Roles.PROFESOR.name()).orElse(null);
                 break;
@@ -95,86 +109,16 @@ public class EmployeeService {
             case "TECNOLOGIAS_DE_LA_INFORMACION":
                 role = roleRepository.findByName(Roles.TECNOLOGIAS_DE_LA_INFORMACION.name()).orElse(null);
                 break;
-            case "RECUSOS_HUMANOS":
+            case "RECURSOS_HUMANOS":
                 role = roleRepository.findByName(Roles.RECURSOS_HUMANOS.name()).orElse(null);
                 break;
         }
-
-       User user = userRepository.save(
-               User.builder()
-                       .person(person)
-                       .role(role)
-                       .username(employee.getNumber())
-                       .password(employee.getNumber())
-                       .email(employeeDto.getEmail())
-                       .active(true)
-                       .build()
-       );
-        return buildEmployeeDto(employee);
-    }
-
-    @Transactional
-    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto employeeDto) {
-        Employee employee = employeeRepository.findById(employeeId).orElseThrow(() -> new RuntimeException("Employee not found"));
-        Person person = personRepository.findById(employee.getPersonId()).orElseThrow(() -> new RuntimeException("Person not found"));
-        person.setFullName(employeeDto.getFullName());
-        person.setPhone(employeeDto.getPhone());
-        person.setCurp(employeeDto.getCurp());
-        personRepository.save(person);
-        Contract contract = contractRepository.findByType(employeeDto.getContract()).orElse(null);
-        if (contract != null) {
-            employee.setContract(contract);
-        }
-        Area area = areaRepository.findByName(employeeDto.getArea()).orElse(null);
-        if (area != null) {
-            employee.setArea(area);
-        }
-        employeeRepository.save(employee);
-        User user = userRepository.findByPersonId(employee.getPersonId()).orElseThrow(() -> new RuntimeException("User not found"));
-        if (employeeDto.getEmail() != null && !employeeDto.getEmail().isEmpty()) {
-            user.setEmail(employeeDto.getEmail());
-        }
-        if (employeeDto.getUsername() != null && !employeeDto.getUsername().isEmpty()) {
-            user.setUsername(employeeDto.getUsername());
-        }
-        if (employeeDto.getPassword() != null && !employeeDto.getPassword().isEmpty()) {
-            user.setPassword(employeeDto.getPassword());
-        }
-        Role role = roleRepository.findByName(employeeDto.getRole()).orElse(null);
-        if (role != null) {
-            user.setRole(role);
-        }
-        userRepository.save(user);
-
-        return buildEmployeeDto(employee);
-    }
-
-    public EmployeeDto getEmployeeById(Long employeeId) {
-        Employee employee = employeeRepository.findById(employeeId)
-                .orElse(null);
-        return buildEmployeeDto(employee);
+        return role;
     }
 
     private EmployeeDto buildEmployeeDto(Employee employee) {
         User user = userRepository.findByPersonId(employee.getPersonId()).orElse(null);
-        return EmployeeDto.builder()
-                .employeeId(employee.getId())
-                .number(employee.getNumber())
-                .startDate(new SimpleDateFormat("dd/MM/yyyy").format(Date.from(employee.getStartDate())))
-                .contract(employee.getContract().getType())
-                .area(employee.getArea().getName())
-                .userId(user.getId())
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .email(user.getEmail())
-                .active(user.isActive())
-                .roleId(user.getRole().getId())
-                .role(user.getRole().getName())
-                .personId(user.getPerson().getId())
-                .fullName(user.getPerson().getFullName())
-                .phone(user.getPerson().getPhone())
-                .curp(user.getPerson().getCurp())
-                .build();
+        return EmployeeDto.builder().employeeId(employee.getId()).number(employee.getNumber()).startDate(new SimpleDateFormat("dd/MM/yyyy").format(Date.from(employee.getStartDate()))).contract(employee.getContract().getType()).area(employee.getArea().getName()).userId(user.getId()).username(user.getUsername()).password(user.getPassword()).email(user.getEmail()).active(user.isActive()).roleId(user.getRole().getId()).role(user.getRole().getName()).personId(user.getPerson().getId()).fullName(user.getPerson().getFullName()).phone(user.getPerson().getPhone()).curp(user.getPerson().getCurp()).build();
 
     }
 }

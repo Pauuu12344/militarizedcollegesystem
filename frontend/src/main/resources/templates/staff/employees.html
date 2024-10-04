@@ -44,7 +44,7 @@
                 </td>
                 <td th:text="${employee.area}"></td>
                 <td>
-                    <a th:href="@{/employees/edit/{id}(id=${employee.employeeId})}" class="btn btn-primary">
+                    <a th:href="@{'/employees/' + ${employee.employeeId}}" class="btn btn-primary">
                         Editar
                     </a>
                 </td>

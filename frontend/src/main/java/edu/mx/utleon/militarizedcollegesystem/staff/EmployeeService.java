@@ -1,8 +1,6 @@
 package edu.mx.utleon.militarizedcollegesystem.staff;
 
 import edu.mx.utleon.militarizedcollegesystem.common.dtos.EmployeeDto;
-import edu.mx.utleon.militarizedcollegesystem.common.dtos.GradeDto;
-import edu.mx.utleon.militarizedcollegesystem.common.entities.staff.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -32,14 +30,16 @@ public class EmployeeService {
         return restTemplate.exchange(path, HttpMethod.GET, null, new ParameterizedTypeReference<List<EmployeeDto>>() {}).getBody();
     }
 
-    public void createEmployee(EmployeeDto employee) {
+    public void saveEmployee(EmployeeDto employee) {
         String path = STAFF_URL + "employees";
         restTemplate.postForObject(path, employee, EmployeeDto.class);
     }
+
     public EmployeeDto getEmployeeById(Long employeeId) {
         String path = STAFF_URL + "employees/" + employeeId;
         return restTemplate.getForObject(path, EmployeeDto.class);
     }
+
     public void updateEmployee(Long employeeId, EmployeeDto employee) {
         String path = STAFF_URL + employeeId;
         HttpEntity<EmployeeDto> requestEntity = new HttpEntity<>(employee);

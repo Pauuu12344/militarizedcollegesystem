@@ -1,4 +1,6 @@
 function validate(form) {
+    const personIdInput = document.getElementById("personId");
+    const personIdValue = personIdInput ? personIdInput.value : null;
     const curpInput = document.getElementById("curp");
     const curpError = document.getElementById("curpError");
     const curpValue = curpInput.value;
@@ -10,9 +12,12 @@ function validate(form) {
     emailError.textContent = "";
     curpError.textContent = "";
 
-    const curpCheck = fetch(`/validate?curp=${curpValue}`, {
+    const curpCheck = fetch(`/validate`, {
         method: 'POST',
-        body: JSON.stringify({curp: curpValue}),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: personIdValue, curp: curpValue })
     }).then(response => response.json())
         .then(data => {
             if (data === true) {
@@ -21,8 +26,12 @@ function validate(form) {
             }
         });
 
-    const emailCheck = fetch(`/validate?email=${emailValue}`, {
+    const emailCheck = fetch(`/validate`, {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: personIdValue, email: emailValue })
     }).then(response => response.json())
         .then(data => {
             if (data === true) {
